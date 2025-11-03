@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
-  DashSpeed: 10
+  DashSpeed: 20
   DashDuration: 0.05
   DashCooldown: 0.1
 --- !u!50 &489129307
