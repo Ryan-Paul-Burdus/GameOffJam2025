@@ -12,11 +12,6 @@ public class InputManager : MonoBehaviour
     public void Awake()
     {
         PlayerInput = GetComponent<PlayerInput>();
-        MoveAction = PlayerInput.actions["Move"];
     }
 
-    private void Update()
-    {
-        Movement = MoveAction.ReadValue<Vector2>();
-    }
 }
