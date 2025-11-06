@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager Instance { get; private set; }
+
     public static Vector2 Movement;
 
     private PlayerInput PlayerInput;
@@ -11,6 +13,13 @@ public class InputManager : MonoBehaviour
 
     public void Awake()
     {
+        if (Instance != null && Instance != this) // if we are the instance this is fine
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+
         PlayerInput = GetComponent<PlayerInput>();
     }
 
