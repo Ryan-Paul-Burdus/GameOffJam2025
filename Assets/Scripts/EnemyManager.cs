@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     public Transform[] SpawnPoints;
 
     private bool canSpawn = true;
-    public float SpawnCooldown = 5f;
+    public float SpawnCooldown = 2f;
 
     private void Awake()
     {
@@ -30,6 +30,8 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    #region Methods
+
     public IEnumerator SpawnEnemyCoroutine()
     {
         canSpawn = false;
@@ -41,4 +43,6 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(SpawnCooldown);
         canSpawn = true;
     }
+
+    #endregion Methods
 }

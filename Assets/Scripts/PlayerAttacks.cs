@@ -41,6 +41,8 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
+    #region Methods
+
     //TODO: Make this return the nearest enemy and let it be accessed more openly so
     //      anything can be done with that closest enemy
     private void FindNearestEnemy()
@@ -78,4 +80,6 @@ public class PlayerAttacks : MonoBehaviour
         yield return new WaitForSeconds(AttackCooldown);
         canAttack = true;
     }
+
+    #endregion Methods
 }

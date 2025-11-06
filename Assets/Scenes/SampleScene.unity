@@ -1553,8 +1553,7 @@ MonoBehaviour:
   - {fileID: 969593304}
   - {fileID: 1767361007}
   - {fileID: 782218634}
-  Player: {fileID: 489129305}
-  SpawnCooldown: 5
+  SpawnCooldown: 2
 --- !u!1 &2035993950
 GameObject:
   m_ObjectHideFlags: 0
