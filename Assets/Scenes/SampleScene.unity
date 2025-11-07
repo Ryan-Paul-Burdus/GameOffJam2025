@@ -651,10 +651,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b686721e43d1a14cbf017c6fd126d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 1
-  DashSpeed: 15
+  moveSpeed: 2
+  DashSpeed: 10
   DashDuration: 0.1
-  DashCooldown: 0.2
+  DashCooldown: 1
 --- !u!50 &489129307
 Rigidbody2D:
   serializedVersion: 5
@@ -804,7 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afba6cec7793b1f4ea78c911254432d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttacks
-  AttackCooldown: 2
+  AttackCooldown: 1.5
   BulletPrefab: {fileID: 614781361733633110, guid: 375148644d5cf08408542a7bd34dff96, type: 3}
 --- !u!1 &543615355
 GameObject:

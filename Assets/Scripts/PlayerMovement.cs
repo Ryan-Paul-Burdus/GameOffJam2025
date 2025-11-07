@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 2f;
     private Vector2 movement;
     private Rigidbody2D rb;
 
     [Header("Dash")]
-    public float DashSpeed = 5f;
-    public float DashDuration = 0.05f;
-    public float DashCooldown = 0.1f;
+    public float DashSpeed = 10f;
+    public float DashDuration = 0.1f;
+    public float DashCooldown = 1f;
     private bool isDashing;
     private bool canDash = true;
     private TrailRenderer dashTrailRenderer;

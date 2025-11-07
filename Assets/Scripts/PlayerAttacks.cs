@@ -8,7 +8,7 @@ public class PlayerAttacks : MonoBehaviour
     private GameObject CurrentTarget;
 
     private bool canAttack = true;
-    public float AttackCooldown = 2f;
+    public float AttackCooldown = 1.5f;
     public GameObject BulletPrefab;
 
 
@@ -72,7 +72,6 @@ public class PlayerAttacks : MonoBehaviour
         canAttack = false;
 
         // Fire bullet to enemy
-        Debug.Log("Attacking enemy!");
         Bullet bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
         bullet.Target = CurrentTarget;
 

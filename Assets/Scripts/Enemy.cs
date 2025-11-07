@@ -3,7 +3,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
-    private float moveSpeed = 2f;
+    private float moveSpeed = 1f;
     private GameObject Player;
 
     private void Awake()
