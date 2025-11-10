@@ -12,6 +12,8 @@ public class EnemyManager : MonoBehaviour
     private bool canSpawn = true;
     public float SpawnCooldown = 2f;
 
+    public GameObject DamageIndicatorPrefab;
+
     private void Awake()
     {
         if (Instance != null && Instance != this) // if we are the instance this is fine
@@ -42,6 +44,14 @@ public class EnemyManager : MonoBehaviour
 
         yield return new WaitForSeconds(SpawnCooldown);
         canSpawn = true;
+    }
+
+    public void TakeDamage(GameObject enemyObject)
+    {
+        DamageIndicator indicator = Instantiate(DamageIndicatorPrefab, enemyObject.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageText(PlayerManager.Instance.Damage);
+
+        Destroy(enemyObject);
     }
 
     #endregion Methods

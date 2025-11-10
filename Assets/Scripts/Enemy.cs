@@ -4,7 +4,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Enemy : MonoBehaviour
 {
     private float moveSpeed = 1f;
-    private GameObject Player;
+    public GameObject Player;
 
     private void Awake()
     {
@@ -19,10 +19,14 @@ public class Enemy : MonoBehaviour
             Quaternion.LookRotation(Vector3.forward, (Player.transform.position - transform.position).normalized)
             );
 
-        // Damage the player if close enough
-        if (Vector3.Distance(transform.position, Player.transform.position) < 0.001f)
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            PlayerManager.Instance.DamagePlayer();
+            PlayerManager.Instance.DamagePlayer(10);
         }
     }
 }

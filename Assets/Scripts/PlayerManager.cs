@@ -1,10 +1,20 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
     public GameObject Player;
+
+    public TextMeshProUGUI DamageText;
+    public float Damage = 5f;
+
+    public TextMeshProUGUI HealthText;
+    public float Health = 100f;
+
+    public float AttackCooldown = 1.5f;
 
     private void Awake()
     {
@@ -14,10 +24,41 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        HealthText.text = Health.ToString();
+        DamageText.text = Damage.ToString();
     }
 
-    public void DamagePlayer()
+    public void IncreaseHealth(float increasePercentage)
     {
-        Debug.Log("Hurt player!");
+        Health += Health * (increasePercentage / 100);
+        HealthText.text = Health.ToString();
+    }
+
+    public void IncreaseDamage(float increasePercentage)
+    {
+        Damage += Damage * (increasePercentage / 100);
+        DamageText.text = Damage.ToString();
+    }
+
+    public void DamagePlayer(float damageAmount)
+    {
+        Health -= damageAmount;
+
+        if (Health < 0)
+        {
+            Health = 0;
+            HealthText.text = Health.ToString();
+            KillPlayer();
+        }
+        else
+        {
+            HealthText.text = Health.ToString();
+        }
+    }
+
+    private void KillPlayer()
+    {
+        //End the game
     }
 }

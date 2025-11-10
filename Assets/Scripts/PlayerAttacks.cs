@@ -6,11 +6,9 @@ public class PlayerAttacks : MonoBehaviour
 {
     private readonly List<GameObject> Targets = new();
     private GameObject CurrentTarget;
-
     private bool canAttack = true;
-    public float AttackCooldown = 1.5f;
-    public GameObject BulletPrefab;
 
+    public GameObject BulletPrefab;
 
     private void Update()
     {
@@ -76,7 +74,7 @@ public class PlayerAttacks : MonoBehaviour
         bullet.Target = CurrentTarget;
 
         // Startthe cooldown for next shot
-        yield return new WaitForSeconds(AttackCooldown);
+        yield return new WaitForSeconds(PlayerManager.Instance.AttackCooldown);
         canAttack = true;
     }
 

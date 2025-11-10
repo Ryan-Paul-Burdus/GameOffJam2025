@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
             // Destroy target if close enough
             if (Vector3.Distance(transform.position, Target.transform.position) < 0.001f)
             {
-                Destroy(Target);
+                EnemyManager.Instance.TakeDamage(Target);
                 Destroy(gameObject);
             }
         }
