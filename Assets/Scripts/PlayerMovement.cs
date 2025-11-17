@@ -24,6 +24,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (PickupManager.Instance.PickupUIVisibile)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
         /// Stuff that can be done whilst dashing goes here
 
         if (isDashing)
@@ -43,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context">The input manager action</param>
     public void MoveMouse(InputAction.CallbackContext context)
     {
+        if (PickupManager.Instance.PickupUIVisibile)
+        {
+            return;
+        }
+
         Vector2 mousePosition = context.ReadValue<Vector2>();
         Vector2 objectPosition = (Vector2)Camera.main.WorldToScreenPoint(transform.position);
         Vector2 direction = (mousePosition - objectPosition).normalized;

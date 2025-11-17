@@ -26,6 +26,11 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        if (PickupManager.Instance.PickupUIVisibile)
+        {
+            return;
+        }
+
         if (canSpawn)
         {
             StartCoroutine(SpawnEnemyCoroutine());

@@ -1,0 +1,109 @@
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+public enum PickupType
+{
+    Powerup,
+}
+
+public class PickupManager : MonoBehaviour
+{
+    public static PickupManager Instance { get; private set; }
+
+    [Header("Pickup UI")]
+    public PickupUIDisplay PickupUI;
+    public bool PickupUIVisibile = false;
+
+    [Header("Powerups")]
+    public Powerup[] AllPowerups;
+    public GameObject PowerupPrefab;
+    private Powerup currentPowerup;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this) // if we are the instance this is fine
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+    }
+
+    #region Powerups
+
+    public void PickupRandomPowerup()
+    {
+        currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
+        PickupUIVisibile = true;
+        PickupUI.ShowPowerupDisplay(currentPowerup);
+    }
+
+    public void TakeCurrentPowerupEffect()
+    {
+        Debug.Log(nameof(currentPowerup.EffectType));
+
+        // Use the powerup to do its effect
+        switch (currentPowerup.EffectType)
+        {
+            case Powerup.PowerUpEffectType.IncreaseDamage:
+                PlayerManager.Instance.IncreaseDamage(currentPowerup.Amount);
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseHealth:
+                PlayerManager.Instance.IncreaseHealth(currentPowerup.Amount);
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseAttackSpeed:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseAttackCount:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseProjectileSize:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseAttackAreaSize:
+                break;
+
+            case Powerup.PowerUpEffectType.ReduceAttackCooldown:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseMoveSpeed:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseProjectileCount:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseSpeed:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseDashLength:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseDashSpeed:
+                break;
+
+            case Powerup.PowerUpEffectType.ReduceDashCooldown:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseShockChance:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseShockDamage:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseCritChance:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseCritDamage:
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseDifficulty:
+                break;
+        }
+    }
+
+    #endregion Powerups
+}

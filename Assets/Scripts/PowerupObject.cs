@@ -7,7 +7,7 @@ public class PowerupObject : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //Pickup powerup
-            PowerupManager.Instance.PickupRandomPowerup();
+            PickupManager.Instance.PickupRandomPowerup();
 
             Destroy(gameObject);
         }

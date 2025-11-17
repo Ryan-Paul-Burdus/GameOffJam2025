@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (PickupManager.Instance.PickupUIVisibile)
+        {
+            return;
+        }
+
         // Move and rotate towards the player
         transform.SetPositionAndRotation(
             Vector3.MoveTowards(transform.position, Player.transform.position, moveSpeed * Time.deltaTime),

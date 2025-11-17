@@ -12,6 +12,11 @@ public class PlayerAttacks : MonoBehaviour
 
     private void Update()
     {
+        if (PickupManager.Instance.PickupUIVisibile)
+        {
+            return;
+        }
+
         // Attack an enemy if possible
         if (canAttack && Targets.Count > 0)
         {
