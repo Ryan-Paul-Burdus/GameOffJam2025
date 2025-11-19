@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: DASH DISTANCE+
   Description: Increases the dash distance by $
-  EffectType: 8
+  EffectType: 7
   Amount: 0.5
   Image: {fileID: 0}

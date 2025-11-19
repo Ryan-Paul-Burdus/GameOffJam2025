@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: SHOCK DMG+
   Description: Increase the shock damage by $%
-  EffectType: 14
+  EffectType: 11
   Amount: 5
   Image: {fileID: 0}

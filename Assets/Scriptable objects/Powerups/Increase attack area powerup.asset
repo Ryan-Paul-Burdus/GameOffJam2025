@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: AOE+
   Description: Increases the area of attack size by $%
   EffectType: 5
-  Amount: 2
+  Amount: 5
   Image: {fileID: 0}

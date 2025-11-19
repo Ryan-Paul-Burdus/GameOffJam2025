@@ -1,27 +1,44 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public GameObject Target;
-    public float BulletSpeed = 10f;
+
+    private Rigidbody2D rb;
+    private float bulletLifetime = 2.0f;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        //transform.rotation = Quaternion.LookRotation(Vector3.forward, (Target.transform.position - transform.position).normalized);
+    }
 
     private void Update()
     {
-        if (Target == null && PickupManager.Instance.PickupUIVisibile)
+        if (PickupManager.Instance.PickupUIVisibile)
         {
+            rb.linearVelocity = Vector3.zero;
             return;
         }
 
-        // Move and rotate towards the target
-        transform.SetPositionAndRotation(
-            Vector3.MoveTowards(transform.position, Target.transform.position, BulletSpeed * Time.deltaTime),
-            Quaternion.LookRotation(Vector3.forward, (Target.transform.position - transform.position).normalized)
-            );
-
-        // Destroy target if close enough
-        if (Vector3.Distance(transform.position, Target.transform.position) < 0.001f)
+        if (bulletLifetime <= 0f)
         {
-            EnemyManager.Instance.TakeDamage(Target);
+            Destroy(gameObject);
+        }
+        else
+        {
+            bulletLifetime -= Time.deltaTime;
+        }
+
+        rb.linearVelocity = transform.up * PlayerManager.Instance.BulletSpeed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            EnemyManager.Instance.TakeDamage(collision.gameObject);
             Destroy(gameObject);
         }
     }

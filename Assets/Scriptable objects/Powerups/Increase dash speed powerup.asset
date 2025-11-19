@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: DASH SPD+
   Description: Increases the dash speed by $%
-  EffectType: 9
+  EffectType: 8
   Amount: 5
   Image: {fileID: 0}

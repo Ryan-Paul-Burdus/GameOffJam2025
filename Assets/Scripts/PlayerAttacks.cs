@@ -6,9 +6,6 @@ public class PlayerAttacks : MonoBehaviour
 {
     private readonly List<GameObject> Targets = new();
     private GameObject CurrentTarget;
-    private bool canAttack = true;
-
-    public GameObject BulletPrefab;
 
     private void Update()
     {
@@ -18,12 +15,12 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         // Attack an enemy if possible
-        if (canAttack && Targets.Count > 0)
+        if (PlayerManager.Instance.canAttack && Targets.Count > 0)
         {
             FindNearestEnemy();
             if (CurrentTarget != null)
             {
-                StartCoroutine(AttackEnemyCoroutine());
+                StartCoroutine(PlayerManager.Instance.AttackEnemyCoroutine(CurrentTarget));
             }
         }
     }
@@ -68,19 +65,6 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         CurrentTarget = closestEnemy;
-    }
-
-    private IEnumerator AttackEnemyCoroutine()
-    {
-        canAttack = false;
-
-        // Fire bullet to enemy
-        Bullet bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
-        bullet.Target = CurrentTarget;
-
-        // Startthe cooldown for next shot
-        yield return new WaitForSeconds(PlayerManager.Instance.AttackCooldown);
-        canAttack = true;
     }
 
     #endregion Methods

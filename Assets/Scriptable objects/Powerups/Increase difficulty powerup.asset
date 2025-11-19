@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: DIFFICULTY+
   Description: Increases the difficulty by $%
-  EffectType: 17
+  EffectType: 14
   Amount: 5
   Image: {fileID: 0}

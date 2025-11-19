@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: DASH CDR-
   Description: Reduces dash cooldown by $%
-  EffectType: 11
+  EffectType: 9
   Amount: 2
   Image: {fileID: 0}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: SHOCK CHANCE+
   Description: Increase the shock chance by $%
-  EffectType: 13
+  EffectType: 10
   Amount: 2
   Image: {fileID: 0}

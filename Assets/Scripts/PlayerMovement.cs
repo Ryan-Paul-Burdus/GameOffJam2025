@@ -4,15 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed = 2f;
-    private Vector2 movement;
     private Rigidbody2D rb;
 
     [Header("Dash")]
-    public float DashSpeed = 10f;
-    public float DashDuration = 0.1f;
-    public float DashCooldown = 1f;
     private bool isDashing;
     private bool canDash = true;
     private TrailRenderer dashTrailRenderer;
@@ -40,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         /// Stuff we dont want happening when dashing goes here
 
         // Moves the player forward all the time
-        rb.linearVelocity = transform.up * moveSpeed;
+        rb.linearVelocity = transform.up * PlayerManager.Instance.MoveSpeed;
     }
 
     /// <summary>
@@ -86,17 +80,17 @@ public class PlayerMovement : MonoBehaviour
         //dashTrailRenderer.emitting = true;
 
         // Dash
-        rb.linearVelocity = transform.up * DashSpeed;
+        rb.linearVelocity = transform.up * PlayerManager.Instance.DashSpeed;
 
-        yield return new WaitForSeconds(DashDuration);
+        yield return new WaitForSeconds(PlayerManager.Instance.DashDuration);
 
         // Stop the dash movement
-        rb.linearVelocity = transform.up * moveSpeed;
+        rb.linearVelocity = transform.up * PlayerManager.Instance.MoveSpeed;
 
         isDashing = false;
         //dashTrailRenderer.emitting = false;
 
-        yield return new WaitForSeconds(DashCooldown);
+        yield return new WaitForSeconds(PlayerManager.Instance.DashCooldown);
         canDash = true;
     }
 

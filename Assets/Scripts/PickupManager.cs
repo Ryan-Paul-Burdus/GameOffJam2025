@@ -36,13 +36,14 @@ public class PickupManager : MonoBehaviour
     public void PickupRandomPowerup()
     {
         currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
+        //currentPowerup = AllPowerups[1];
         PickupUIVisibile = true;
         PickupUI.ShowPowerupDisplay(currentPowerup);
     }
 
     public void TakeCurrentPowerupEffect()
     {
-        Debug.Log(nameof(currentPowerup.EffectType));
+        Debug.Log(currentPowerup.EffectType);
 
         // Use the powerup to do its effect
         switch (currentPowerup.EffectType)
@@ -56,30 +57,27 @@ public class PickupManager : MonoBehaviour
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseAttackSpeed:
-                break;
-
-            case Powerup.PowerUpEffectType.IncreaseAttackCount:
+                PlayerManager.Instance.IncreaseAttackSpeed(currentPowerup.Amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseProjectileSize:
-                break;
-
-            case Powerup.PowerUpEffectType.IncreaseAttackAreaSize:
-                break;
-
-            case Powerup.PowerUpEffectType.ReduceAttackCooldown:
-                break;
-
-            case Powerup.PowerUpEffectType.IncreaseMoveSpeed:
+                PlayerManager.Instance.IncreaseProjectileSize(currentPowerup.Amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseProjectileCount:
+                PlayerManager.Instance.IncreaseProjectileCount((int)currentPowerup.Amount);
                 break;
 
-            case Powerup.PowerUpEffectType.IncreaseSpeed:
+            case Powerup.PowerUpEffectType.IncreaseAttackAreaSize:
+                PlayerManager.Instance.IncreaseAttackAreaOfSize(currentPowerup.Amount);
                 break;
 
-            case Powerup.PowerUpEffectType.IncreaseDashLength:
+            case Powerup.PowerUpEffectType.IncreaseMoveSpeed:
+                PlayerManager.Instance.IncreaseMoveSpeed(currentPowerup.Amount);
+                break;
+
+            case Powerup.PowerUpEffectType.IncreaseDashDistance:
+                PlayerManager.Instance.IncreaseDashDistance(currentPowerup.Amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseDashSpeed:

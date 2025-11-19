@@ -3810,11 +3810,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   Player: {fileID: 489129305}
+  AttackObject: {fileID: 2145838990}
   DamageText: {fileID: 612243645}
   Damage: 5
   HealthText: {fileID: 1854984055}
   Health: 100
   AttackCooldown: 1.5
+  AttackAreaOfSize: 3.5
+  BulletPrefab: {fileID: 614781361733633110, guid: 375148644d5cf08408542a7bd34dff96, type: 3}
+  canAttack: 1
+  BulletSpeed: 2
+  ProjectileScale: 0.05
+  TotalProjectileCount: 1
+  SpreadAngle: 60
 --- !u!1 &2119412432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3981,7 +3989,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afba6cec7793b1f4ea78c911254432d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttacks
-  BulletPrefab: {fileID: 614781361733633110, guid: 375148644d5cf08408542a7bd34dff96, type: 3}
 --- !u!58 &2145838994
 CircleCollider2D:
   m_ObjectHideFlags: 0

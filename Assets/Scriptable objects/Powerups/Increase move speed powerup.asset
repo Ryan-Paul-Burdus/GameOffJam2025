@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: MOVE SPD+
   Description: Increase move speed by $%
-  EffectType: 7
+  EffectType: 6
   Amount: 5
   Image: {fileID: 0}
