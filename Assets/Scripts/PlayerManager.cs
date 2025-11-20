@@ -9,11 +9,12 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance { get; private set; }
 
     public GameObject Player;
-    public GameObject AttackObject;
-
+    
+    [Header("Damage")]
     public TextMeshProUGUI DamageText;
-    public float Damage = 5f;
+    public float Damage = 10f;
 
+    [Header("Health")]
     public TextMeshProUGUI HealthText;
     public float Health = 100f;
 
@@ -24,13 +25,14 @@ public class PlayerManager : MonoBehaviour
     public float DashCooldown = 1f;
 
     [Header("Attacks")]
+    public GameObject AttackObject;
     public float AttackCooldown = 1.5f;
     public float AttackAreaOfSize = 3.5f;
     
     [Header("Bullets")]
     public GameObject BulletPrefab;
     public bool canAttack = true;
-    public float BulletSpeed = 2f;
+    public float BulletSpeed = 7f;
     public float ProjectileScale = 0.05f;
     public int TotalProjectileCount = 1;
     public float SpreadAngle = 60f;
@@ -121,7 +123,17 @@ public class PlayerManager : MonoBehaviour
 
     public void IncreaseDashDistance(float increaseAmount)
     {
-        DashDuration += increaseAmount;
+        DashDuration += increaseAmount / 10;
+    }
+
+    public void IncreaseDashSpeed(float increasePercentage)
+    {
+        DashSpeed += DashSpeed * (increasePercentage / 100);
+    }
+
+    public void ReduceDashCooldown(float reductionPrecentage)
+    {
+        DashCooldown -= DashCooldown * (reductionPrecentage / 100);
     }
 
     public void DamagePlayer(float damageAmount)

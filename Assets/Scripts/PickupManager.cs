@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,6 +9,13 @@ using UnityEngine.UI;
 public enum PickupType
 {
     Powerup,
+}
+
+[System.Serializable]
+public struct PowerupSpawnLocation
+{
+    public Transform Location;
+    public bool Occupied;
 }
 
 public class PickupManager : MonoBehaviour
@@ -17,8 +27,14 @@ public class PickupManager : MonoBehaviour
     public bool PickupUIVisibile = false;
 
     [Header("Powerups")]
-    public Powerup[] AllPowerups;
     public GameObject PowerupPrefab;
+    public Powerup[] AllPowerups;
+    public PowerupSpawnLocation[] PowerupSpawnLocations;
+    public int MaxPowerupsAllowedOnMap = 8;
+    public int CurrentPowerupsOnMap = 0; 
+    public float PowerupSpawnCooldown = 5f;
+    private bool canSpawnPowerup = true;
+
     private Powerup currentPowerup;
 
     private void Awake()
@@ -31,14 +47,54 @@ public class PickupManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        if (PickupUIVisibile)
+        {
+            return;
+        }
+
+        if (canSpawnPowerup && CurrentPowerupsOnMap < MaxPowerupsAllowedOnMap)
+        {
+            StartCoroutine(SpawnPowerupCoroutine());
+        }
+    }
+
     #region Powerups
 
-    public void PickupRandomPowerup()
+    public IEnumerator SpawnPowerupCoroutine()
     {
+        canSpawnPowerup = false;
+
+        // Gets an un-occupied spawn location and spawns it
+        List<PowerupSpawnLocation> availablePowerupLocations = PowerupSpawnLocations.Where(x => !x.Occupied).ToList();
+        int randomSpawnIndex = Random.Range(0, availablePowerupLocations.Count());
+        PowerupSpawnLocation randomSpawnLocation = availablePowerupLocations[randomSpawnIndex];
+
+        PowerupObject powerUpObjectScript = Instantiate(PowerupPrefab,
+            randomSpawnLocation.Location.position,
+            Quaternion.identity).GetComponent<PowerupObject>();
+
+        powerUpObjectScript.SpawnLocationIndex = randomSpawnIndex;
+        randomSpawnLocation.Occupied = true;
+        CurrentPowerupsOnMap++;
+
+        yield return new WaitForSeconds(PowerupSpawnCooldown);
+        canSpawnPowerup = true;
+    }
+
+    public IEnumerator PickupRandomPowerupCoroutine(int spawnLocationIndex)
+    {
+        // Get a random powerup to pick up and pick it up
         currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
         //currentPowerup = AllPowerups[1];
         PickupUIVisibile = true;
         PickupUI.ShowPowerupDisplay(currentPowerup);
+
+        yield return new WaitForSeconds(2f);
+
+        // Make the space unoccupied after pickup
+        PowerupSpawnLocations[spawnLocationIndex].Occupied = false;
     }
 
     public void TakeCurrentPowerupEffect()
@@ -81,9 +137,11 @@ public class PickupManager : MonoBehaviour
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseDashSpeed:
+                PlayerManager.Instance.IncreaseDashSpeed(currentPowerup.Amount);
                 break;
 
             case Powerup.PowerUpEffectType.ReduceDashCooldown:
+                PlayerManager.Instance.ReduceDashCooldown(currentPowerup.Amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseShockChance:

@@ -7,10 +7,10 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance { get; private set; }
 
     public GameObject[] EnemyPrefabs;
-    public Transform[] SpawnPoints;
+    public Transform[] EnemySpawnLocations;
 
     private bool canSpawn = true;
-    public float SpawnCooldown = 2f;
+    public float SpawnCooldown = 5f;
 
     public GameObject DamageIndicatorPrefab;
 
@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour
         canSpawn = false;
 
         Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)],
-            SpawnPoints[Random.Range(0, SpawnPoints.Length)].position,
+            EnemySpawnLocations[Random.Range(0, EnemySpawnLocations.Length)].position,
             Quaternion.identity);
 
         yield return new WaitForSeconds(SpawnCooldown);
@@ -53,10 +53,20 @@ public class EnemyManager : MonoBehaviour
 
     public void TakeDamage(GameObject enemyObject)
     {
-        DamageIndicator indicator = Instantiate(DamageIndicatorPrefab, enemyObject.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-        indicator.SetDamageText(PlayerManager.Instance.Damage);
+        float damage = PlayerManager.Instance.Damage;
 
-        Destroy(enemyObject);
+        // Create damage indicator
+        DamageIndicator indicator = Instantiate(DamageIndicatorPrefab, enemyObject.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageText(damage);
+
+        // Do damage to the enemy
+        Enemy enemyScript = enemyObject.GetComponent<Enemy>();
+        enemyScript.Health -= damage;
+
+        if (enemyScript.Health <= 0)
+        {
+            Destroy(enemyObject);
+        }
     }
 
     #endregion Methods
