@@ -51,6 +51,9 @@ TagManager:
   - name: DamageText
     uniqueID: 2510869895
     locked: 0
+  - name: UI
+    uniqueID: 2128197185
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
