@@ -30,7 +30,7 @@ public class PickupManager : MonoBehaviour
     public GameObject PowerupPrefab;
     public Powerup[] AllPowerups;
     public PowerupSpawnLocation[] PowerupSpawnLocations;
-    public int MaxPowerupsAllowedOnMap = 8;
+    public int MaxPowerupsAllowedOnMap = 10;
     public int CurrentPowerupsOnMap = 0; 
     public float PowerupSpawnCooldown = 5f;
     private bool canSpawnPowerup = true;
@@ -159,6 +159,8 @@ public class PickupManager : MonoBehaviour
             case Powerup.PowerUpEffectType.IncreaseDifficulty:
                 break;
         }
+
+        CurrentPowerupsOnMap--;
     }
 
     #endregion Powerups

@@ -1,14 +1,26 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerManager : MonoBehaviour
 {
+    #region Properties
+
     public static PlayerManager Instance { get; private set; }
 
     public GameObject Player;
+    private PlayerMovement playerMovement;
+
+    public GameObject DamageIndicatorPrefab;
+
+    [Header("Animations")]
+    public List<Sprite> PlayerAnimationSprites;
+    private SpriteRenderer spriteRenderer;
+    private int animationIndex = 0;
+    private float timer;
+    public float timeInterval = 0.15f;
     
     [Header("Damage")]
     public TextMeshProUGUI DamageText;
@@ -37,6 +49,10 @@ public class PlayerManager : MonoBehaviour
     public int TotalProjectileCount = 1;
     public float SpreadAngle = 60f;
 
+    #endregion Properties
+
+    #region Unity events
+
     private void Awake()
     {
         if (Instance != null && Instance != this) // if we are the instance this is fine
@@ -46,9 +62,50 @@ public class PlayerManager : MonoBehaviour
         }
         Instance = this;
 
+        spriteRenderer = Player.GetComponent<SpriteRenderer>();
+        playerMovement = Player.GetComponent<PlayerMovement>();
+
         HealthText.text = Health.ToString();
         DamageText.text = Damage.ToString();
     }
+
+    private void Update()
+    {
+        if (PickupManager.Instance.PickupUIVisibile)
+        {
+            return;
+        }
+
+        // Baked player animations
+        if (playerMovement.IsDashing)
+        {
+            spriteRenderer.sprite = PlayerAnimationSprites[0];
+            timer = 0f;
+            animationIndex = 0;
+        }
+        else
+        {
+            // Loop through the player animations
+            if (PlayerAnimationSprites != null)
+            {
+                timer += Time.deltaTime;
+                if (timer >= timeInterval)
+                {
+                    timer = 0f;
+                    animationIndex++;
+
+                    if (animationIndex >= PlayerAnimationSprites.Count)
+                    {
+                        animationIndex = 0;
+                    }
+
+                    spriteRenderer.sprite = PlayerAnimationSprites[animationIndex];
+                }
+            }
+        }
+    }
+
+    #endregion Unity events
 
     #region Methods
 
@@ -82,6 +139,8 @@ public class PlayerManager : MonoBehaviour
     }
 
     #endregion Enemies
+
+    #region Powerups
 
     public void IncreaseHealth(float increasePercentage)
     {
@@ -136,8 +195,14 @@ public class PlayerManager : MonoBehaviour
         DashCooldown -= DashCooldown * (reductionPrecentage / 100);
     }
 
+    #endregion Powerups
+
     public void DamagePlayer(float damageAmount)
     {
+        // Create damage indicator
+        DamageIndicator indicator = Instantiate(DamageIndicatorPrefab, Player.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageText(damageAmount);
+
         Health -= damageAmount;
 
         if (Health < 0)

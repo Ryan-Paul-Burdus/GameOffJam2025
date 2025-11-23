@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("Dash")]
-    private bool isDashing;
+    public bool IsDashing;
     private bool canDash = true;
     private TrailRenderer dashTrailRenderer;
 
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         /// Stuff that can be done whilst dashing goes here
 
-        if (isDashing)
+        if (IsDashing)
         {
             return;
         }
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     /// <returns></returns>
     private IEnumerator DashCoroutine()
     {
-        isDashing = true;
+        IsDashing = true;
         canDash = false;
         //dashTrailRenderer.emitting = true;
 
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         // Stop the dash movement
         rb.linearVelocity = transform.up * PlayerManager.Instance.MoveSpeed;
 
-        isDashing = false;
+        IsDashing = false;
         //dashTrailRenderer.emitting = false;
 
         yield return new WaitForSeconds(PlayerManager.Instance.DashCooldown);

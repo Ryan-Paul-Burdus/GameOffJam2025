@@ -11,7 +11,6 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //transform.rotation = Quaternion.LookRotation(Vector3.forward, (Target.transform.position - transform.position).normalized);
     }
 
     private void Update()

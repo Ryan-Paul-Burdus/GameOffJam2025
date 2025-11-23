@@ -10,8 +10,9 @@ public class Enemy : MonoBehaviour
     [Header("Enemy properties")]
     public GameObject EnemyObject;
     private float moveSpeed = 1f;
-
     public float MaxHealth = 50f;
+    public float Damage = 10f;
+
     private float health;
     public float Health
     {
@@ -48,5 +49,13 @@ public class Enemy : MonoBehaviour
         // Move and rotate towards the player
         transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, moveSpeed * Time.deltaTime);
         EnemyObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerManager.Instance.DamagePlayer(Damage);
+        }
     }
 }
