@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 1798895777690951189}
   - component: {fileID: 3991573335741748580}
   - component: {fileID: 6093589468862293477}
-  - component: {fileID: 8689513970193568999}
+  - component: {fileID: 1377891321892039288}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -126,8 +126,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   Player: {fileID: 0}
   HealthSlider: {fileID: 4890380957846970860}
+  EnemyAnimationSprites:
+  - {fileID: 511349911, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
+  - {fileID: -544849617, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
+  - {fileID: 655111276, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
+  - {fileID: 1799876838, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
+  timeInterval: 0.25
   EnemyObject: {fileID: 6640015240579213193}
   MaxHealth: 50
+  Damage: 10
 --- !u!50 &6093589468862293477
 Rigidbody2D:
   serializedVersion: 5
@@ -155,8 +162,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!58 &8689513970193568999
-CircleCollider2D:
+--- !u!70 &1377891321892039288
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -189,8 +196,9 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 0.25, y: 0.7}
+  m_Direction: 0
 --- !u!1 &3513975662715526851
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,8 +234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 0.15}
+  m_AnchoredPosition: {x: 0, y: 0.581}
+  m_SizeDelta: {x: 0.6, y: 0.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4890380957846970860
 MonoBehaviour:
@@ -316,8 +324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.7}
-  m_SizeDelta: {x: 1, y: 0.15}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1296132476110750950
 Canvas:
@@ -538,7 +546,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -574,7 +582,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1798895777690951189}
@@ -626,7 +634,7 @@ SpriteRenderer:
   m_SortingLayerID: -1669381977
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 511349911, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

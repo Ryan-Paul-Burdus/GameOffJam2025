@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 850542206b67f4f4ab339ca03faf8065
+guid: b45b4dbd2dd7a264b88c6d520669303b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,13 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shark_0
+      name: Diver_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 9
-        height: 16
+        x: 6
+        y: 2
+        width: 4
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f16b3fe9328f3847aa5b8cc3d8dd40f
-      internalID: 1254505685
+      spriteID: 3321f6bbc6919254a929612d6f100b15
+      internalID: 511349911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shark_1
+      name: Diver_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 0
-        width: 9
-        height: 16
+        x: 22
+        y: 2
+        width: 4
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +186,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 679518fcba80fdc4f8670bd91f9ba996
-      internalID: 499430455
+      spriteID: da5da6f8577883f46a110e2dd8c2d679
+      internalID: -544849617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shark_2
+      name: Diver_2
       rect:
         serializedVersion: 2
-        x: 35
-        y: 0
-        width: 9
-        height: 16
+        x: 38
+        y: 2
+        width: 4
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 045285f9a53ebc74bbb041a7a4866eef
-      internalID: -875456225
+      spriteID: 390a3613bca8a2745ac952ec978cc38f
+      internalID: 655111276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shark_3
+      name: Diver_3
       rect:
         serializedVersion: 2
-        x: 51
-        y: 0
-        width: 9
-        height: 16
+        x: 54
+        y: 2
+        width: 4
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,96 +230,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63d13e6bc8bd7c641a84eb9703289484
-      internalID: 1702113439
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shark_4
-      rect:
-        serializedVersion: 2
-        x: 67
-        y: 0
-        width: 9
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a8dbc809375b1e49b997986bc28f02c
-      internalID: -509246751
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shark_5
-      rect:
-        serializedVersion: 2
-        x: 83
-        y: 0
-        width: 9
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78c24b17a83584840a2cf6aae62d96b6
-      internalID: 720609143
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shark_6
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 0
-        width: 9
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d3b123ef88042d41a61af8fedc7fa9b
-      internalID: -2070806255
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Shark_7
-      rect:
-        serializedVersion: 2
-        x: 115
-        y: 0
-        width: 9
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f7c10bfe0ebca5c4ca06478e172abdf6
-      internalID: -641532434
+      spriteID: e2a31234c48a916488bb70454f800c62
+      internalID: 1799876838
       vertices: []
       indices: 
       edges: []
@@ -328,7 +240,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 680ad30d56ee9814fb1b1fe5e4dc244f
+    spriteID: d83ded3462c227c44bbf7247baf9b104
     internalID: 0
     vertices: []
     indices: 
@@ -338,16 +250,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":9.0,"y":16.0},"gridSpriteOffset":{"x":3.0,"y":0.0},"gridSpritePadding":{"x":7.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":4.0,"y":14.0},"gridSpriteOffset":{"x":6.0,"y":0.0},"gridSpritePadding":{"x":12.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":1,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Shark_0: 1254505685
-      Shark_1: 499430455
-      Shark_2: -875456225
-      Shark_3: 1702113439
-      Shark_4: -509246751
-      Shark_5: 720609143
-      Shark_6: -2070806255
-      Shark_7: -641532434
+      Diver_0: 511349911
+      Diver_1: -544849617
+      Diver_2: 655111276
+      Diver_3: 1799876838
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

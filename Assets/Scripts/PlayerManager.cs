@@ -37,15 +37,15 @@ public class PlayerManager : MonoBehaviour
     public float DashCooldown = 1f;
 
     [Header("Attacks")]
-    public GameObject AttackObject;
+    public GameObject AttackAreaObject;
     public float AttackCooldown = 1.5f;
-    public float AttackAreaOfSize = 3.5f;
+    public float AttackAreaOfSize = 0.2f;
     
     [Header("Bullets")]
     public GameObject BulletPrefab;
     public bool canAttack = true;
     public float BulletSpeed = 7f;
-    public float ProjectileScale = 0.05f;
+    public float ProjectileScale = 1f;
     public int TotalProjectileCount = 1;
     public float SpreadAngle = 60f;
 
@@ -77,6 +77,15 @@ public class PlayerManager : MonoBehaviour
         }
 
         // Baked player animations
+        UpdatePlayerAnimation();
+    }
+
+    #endregion Unity events
+
+    #region Methods
+
+    private void UpdatePlayerAnimation()
+    {
         if (playerMovement.IsDashing)
         {
             spriteRenderer.sprite = PlayerAnimationSprites[0];
@@ -104,10 +113,6 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
-
-    #endregion Unity events
-
-    #region Methods
 
     #region Enemies
 
@@ -172,7 +177,7 @@ public class PlayerManager : MonoBehaviour
     public void IncreaseAttackAreaOfSize(float increasePercentage)
     {
         AttackAreaOfSize += AttackAreaOfSize * (increasePercentage / 100);
-        AttackObject.transform.localScale = new Vector3(AttackAreaOfSize, AttackAreaOfSize, 1);
+        AttackAreaObject.transform.localScale = new Vector3(AttackAreaOfSize, AttackAreaOfSize, 1);
     }
 
     public void IncreaseMoveSpeed(float increasePercentage)
@@ -196,6 +201,8 @@ public class PlayerManager : MonoBehaviour
     }
 
     #endregion Powerups
+
+    #region Damage player
 
     public void DamagePlayer(float damageAmount)
     {
@@ -221,6 +228,8 @@ public class PlayerManager : MonoBehaviour
     {
         //End the game
     }
+
+    #endregion Damage player
 
     #endregion Methods
 }
