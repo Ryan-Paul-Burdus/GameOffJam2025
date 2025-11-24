@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile)
+        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
         {
             return;
         }

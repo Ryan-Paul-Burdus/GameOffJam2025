@@ -49,7 +49,7 @@ public class PickupManager : MonoBehaviour
 
     private void Update()
     {
-        if (PickupUIVisibile)
+        if (PickupUIVisibile || MenuManager.Instance.IsPaused)
         {
             return;
         }

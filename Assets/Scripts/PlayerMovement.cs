@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile)
+        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
         {
             rb.linearVelocity = Vector3.zero;
             return;

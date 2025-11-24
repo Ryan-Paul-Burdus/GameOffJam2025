@@ -24,7 +24,7 @@ public class DamageIndicator : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile)
+        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
         {
             return;
         }

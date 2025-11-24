@@ -71,7 +71,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile)
+        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
         {
             return;
         }
@@ -212,7 +212,7 @@ public class PlayerManager : MonoBehaviour
 
         Health -= damageAmount;
 
-        if (Health < 0)
+        if (Health <= 0)
         {
             Health = 0;
             HealthText.text = Health.ToString();
@@ -226,7 +226,10 @@ public class PlayerManager : MonoBehaviour
 
     private void KillPlayer()
     {
+        // Do anything needed before killing the player
+
         //End the game
+        MenuManager.Instance.OpenGameOverMenu();
     }
 
     #endregion Damage player
