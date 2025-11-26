@@ -1,13 +1,22 @@
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+[System.Serializable]
+public struct EnemySpawnLocation
+{
+    public Transform Location;
+    public bool IsWithinPlayArea;
+}
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
 
     public GameObject[] EnemyPrefabs;
-    public Transform[] EnemySpawnLocations;
+    public EnemySpawnLocation[] EnemySpawnLocations;
 
     private bool canSpawn = true;
     public float SpawnCooldown = 5f;
@@ -43,9 +52,14 @@ public class EnemyManager : MonoBehaviour
     {
         canSpawn = false;
 
-        Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)],
-            EnemySpawnLocations[Random.Range(0, EnemySpawnLocations.Length)].position,
+        EnemySpawnLocation[] possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToArray();
+
+        if (possibleLocationsToSpawn.Length > 0)
+        {
+            Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)],
+            possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position,
             Quaternion.identity);
+        }
 
         yield return new WaitForSeconds(SpawnCooldown);
         canSpawn = true;
