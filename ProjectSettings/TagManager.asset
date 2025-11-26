@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - EnemySpawnLocation
   - Map
+  - EnemySpawnBorder
   layers:
   - Default
   - TransparentFX

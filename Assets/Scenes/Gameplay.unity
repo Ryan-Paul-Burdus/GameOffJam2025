@@ -3337,6 +3337,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615804293}
   m_CullTransparentMesh: 1
+--- !u!1 &619695576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 619695577}
+  m_Layer: 0
+  m_Name: Enemy spawn border
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &619695577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619695576}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1064935226}
+  - {fileID: 1046843550}
+  - {fileID: 1080986395}
+  - {fileID: 1731255828}
+  m_Father: {fileID: 1508545083}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &620707382
 GameObject:
   m_ObjectHideFlags: 0
@@ -5192,8 +5227,8 @@ GameObject:
   - component: {fileID: 1046843550}
   - component: {fileID: 1046843551}
   m_Layer: 0
-  m_Name: GameObject (1)
-  m_TagString: Map
+  m_Name: Enemy spawn border
+  m_TagString: EnemySpawnBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5206,12 +5241,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046843549}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1508545083}
+  m_Father: {fileID: 619695577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1046843551
 BoxCollider2D:
@@ -5270,8 +5305,8 @@ GameObject:
   - component: {fileID: 1064935226}
   - component: {fileID: 1064935227}
   m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Map
+  m_Name: Enemy spawn border
+  m_TagString: EnemySpawnBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5284,12 +5319,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064935225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1508545083}
+  m_Father: {fileID: 619695577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1064935227
 BoxCollider2D:
@@ -5379,8 +5414,8 @@ GameObject:
   - component: {fileID: 1080986395}
   - component: {fileID: 1080986396}
   m_Layer: 0
-  m_Name: GameObject (2)
-  m_TagString: Map
+  m_Name: Enemy spawn border
+  m_TagString: EnemySpawnBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5393,12 +5428,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080986394}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1508545083}
+  m_Father: {fileID: 619695577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1080986396
 BoxCollider2D:
@@ -7019,10 +7054,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1329244359}
-  - {fileID: 1064935226}
-  - {fileID: 1046843550}
-  - {fileID: 1080986395}
-  - {fileID: 1731255828}
+  - {fileID: 619695577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &1508545084
@@ -7884,8 +7916,8 @@ GameObject:
   - component: {fileID: 1731255828}
   - component: {fileID: 1731255829}
   m_Layer: 0
-  m_Name: GameObject (3)
-  m_TagString: Map
+  m_Name: Enemy spawn border
+  m_TagString: EnemySpawnBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7898,12 +7930,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731255827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1508545083}
+  m_Father: {fileID: 619695577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1731255829
 BoxCollider2D:
@@ -9870,7 +9902,6 @@ MonoBehaviour:
     IsWithinPlayArea: 1
   SpawnCooldown: 5
   DamageIndicatorPrefab: {fileID: 5383796887495990168, guid: 5c1b680478de1e9489ee34d04d782ea2, type: 3}
-  spawnersOutside: []
 --- !u!1 &2035993950
 GameObject:
   m_ObjectHideFlags: 0
