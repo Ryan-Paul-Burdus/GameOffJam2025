@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum PickupType
 {
@@ -35,13 +32,14 @@ public class PickupManager : MonoBehaviour
     [Header("Powerups")]
     public GameObject PowerupPrefab;
     public Powerup[] AllPowerups;
+    public Transform PowerupHolder;
     public Transform PowerupSpawnHolder;
-    public List<PowerupSpawnLocation> PowerupSpawnLocations;
-    public int MaxPowerupsAllowedOnMap = 10;
+    public int MaxPowerupsAllowedOnMap = 30;
     public int CurrentPowerupsOnMap = 0; 
-    public float PowerupSpawnCooldown = 5f;
-    private bool canSpawnPowerup = true;
+    public float PowerupSpawnCooldown = 2f;
 
+    private List<PowerupSpawnLocation> PowerupSpawnLocations = new();
+    private bool canSpawnPowerup = true;
     private Powerup currentPowerup;
 
     private void Start()
@@ -90,7 +88,7 @@ public class PickupManager : MonoBehaviour
 
         PowerupObject powerUpObjectScript = Instantiate(PowerupPrefab,
             randomSpawnLocation.Location.position,
-            Quaternion.identity).GetComponent<PowerupObject>();
+            Quaternion.identity, PowerupHolder).GetComponent<PowerupObject>();
 
         powerUpObjectScript.SpawnLocationIndex = randomSpawnIndex;
         randomSpawnLocation.Occupied = true;

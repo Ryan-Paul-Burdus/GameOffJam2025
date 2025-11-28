@@ -67,9 +67,18 @@ public class Enemy : MonoBehaviour
 
         // Move and rotate towards the player
         agent.SetDestination(Player.transform.position);
-        agent.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
 
         UpdateEnemyAnimation();
+    }
+
+    private void LateUpdate()
+    {
+        // Check if the agent is moving to avoid errors when stationary
+        if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
+        {
+            // Calculate the rotation that looks in the direction of the velocity
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, agent.velocity.normalized);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

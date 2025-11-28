@@ -18,9 +18,10 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject[] EnemyPrefabs;
     public EnemySpawnLocation[] EnemySpawnLocations;
+    public Transform EnemyHolder;
 
-    public bool canSpawn = true;
-    public float SpawnCooldown = 5f;
+    private bool canSpawn = true;
+    public float SpawnCooldown = 2.5f;
 
     public GameObject DamageIndicatorPrefab;
 
@@ -60,9 +61,9 @@ public class EnemyManager : MonoBehaviour
         if (possibleLocationsToSpawn.Length > 0)
         {
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position, out hit, 20f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position, out hit, 10f, NavMesh.AllAreas))
             {
-                GameObject enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)]);
+                GameObject enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], EnemyHolder);
                 enemy.GetComponent<Enemy>().agent.Warp(hit.position);
             }
 
