@@ -12,10 +12,16 @@ public enum PickupType
 }
 
 [System.Serializable]
-public struct PowerupSpawnLocation
+public class PowerupSpawnLocation
 {
-    public Transform Location;
-    public bool Occupied;
+    public PowerupSpawnLocation(Transform spawnLocation, bool occupied)
+    {
+        Location = spawnLocation;
+        Occupied = occupied;
+    }
+
+    public Transform Location { get; }
+    public bool Occupied { get; set; }
 }
 
 public class PickupManager : MonoBehaviour
@@ -29,13 +35,24 @@ public class PickupManager : MonoBehaviour
     [Header("Powerups")]
     public GameObject PowerupPrefab;
     public Powerup[] AllPowerups;
-    public PowerupSpawnLocation[] PowerupSpawnLocations;
+    public Transform PowerupSpawnHolder;
+    public List<PowerupSpawnLocation> PowerupSpawnLocations;
     public int MaxPowerupsAllowedOnMap = 10;
     public int CurrentPowerupsOnMap = 0; 
     public float PowerupSpawnCooldown = 5f;
     private bool canSpawnPowerup = true;
 
     private Powerup currentPowerup;
+
+    private void Start()
+    {
+        PowerupSpawnLocations.Clear();
+
+        foreach (Transform spawnLocation in PowerupSpawnHolder)
+        {
+            PowerupSpawnLocations.Add(new PowerupSpawnLocation(spawnLocation, false));
+        }
+    }
 
     private void Awake()
     {

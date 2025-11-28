@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: NavMesh
+    uniqueID: 860334579
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

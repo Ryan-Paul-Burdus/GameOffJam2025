@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
-{
+{ 
+    public NavMeshAgent agent;
+    
     public GameObject Player;
 
     public Slider HealthSlider;
@@ -16,7 +19,6 @@ public class Enemy : MonoBehaviour
     public float timeInterval = 0.25f;
 
     [Header("Enemy properties")]
-    public GameObject EnemyObject;
     private float moveSpeed = 1f;
     public float MaxHealth = 50f;
     public float Damage = 10f;
@@ -37,10 +39,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        agent.updateUpAxis = false;
+        agent.updateRotation = false;
+        agent.speed = moveSpeed;
+    }
+
     private void Awake()
     {
         Player = PlayerManager.Instance.Player;
-        spriteRenderer = EnemyObject.GetComponent<SpriteRenderer>();
 
         Health = MaxHealth;
         HealthSlider.maxValue = MaxHealth;
@@ -56,8 +66,8 @@ public class Enemy : MonoBehaviour
         Vector3 direction = (Player.transform.position - transform.position).normalized;
 
         // Move and rotate towards the player
-        transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, moveSpeed * Time.deltaTime);
-        EnemyObject.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        agent.SetDestination(Player.transform.position);
+        agent.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
 
         UpdateEnemyAnimation();
     }

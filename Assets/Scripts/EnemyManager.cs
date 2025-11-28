@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public struct EnemySpawnLocation
@@ -18,7 +19,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] EnemyPrefabs;
     public EnemySpawnLocation[] EnemySpawnLocations;
 
-    private bool canSpawn = true;
+    public bool canSpawn = true;
     public float SpawnCooldown = 5f;
 
     public GameObject DamageIndicatorPrefab;
@@ -54,11 +55,20 @@ public class EnemyManager : MonoBehaviour
 
         EnemySpawnLocation[] possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToArray();
 
+        
+
         if (possibleLocationsToSpawn.Length > 0)
         {
-            Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)],
-            possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position,
-            Quaternion.identity);
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position, out hit, 20f, NavMesh.AllAreas))
+            {
+                GameObject enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)]);
+                enemy.GetComponent<Enemy>().agent.Warp(hit.position);
+            }
+
+            //Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)],
+            //possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position,
+            //Quaternion.identity);
         }
 
         yield return new WaitForSeconds(SpawnCooldown);
