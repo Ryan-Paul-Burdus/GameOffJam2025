@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -23,12 +24,27 @@ public class PlayerManager : MonoBehaviour
     public float timeInterval = 0.15f;
     
     [Header("Damage")]
-    public TextMeshProUGUI DamageText;
     public float Damage = 10f;
 
     [Header("Health")]
-    public TextMeshProUGUI HealthText;
-    public float Health = 100f;
+    public Slider HealthSlider;
+    public float MaxHealth = 100f;
+
+    private float health;
+    public float Health
+    {
+        get => health;
+        set
+        {
+            health = value;
+            HealthSlider.value = health;
+
+            if (!HealthSlider.gameObject.activeSelf && health < MaxHealth)
+            {
+                HealthSlider.gameObject.SetActive(true);
+            }
+        }
+    }
 
     [Header("Movement")]
     public float MoveSpeed = 2f;
@@ -65,8 +81,8 @@ public class PlayerManager : MonoBehaviour
         spriteRenderer = Player.GetComponent<SpriteRenderer>();
         playerMovement = Player.GetComponent<PlayerMovement>();
 
-        HealthText.text = Health.ToString();
-        DamageText.text = Damage.ToString();
+        Health = MaxHealth;
+        HealthSlider.maxValue = MaxHealth;
     }
 
     private void Update()
@@ -150,13 +166,11 @@ public class PlayerManager : MonoBehaviour
     public void IncreaseHealth(float increasePercentage)
     {
         Health += Health * (increasePercentage / 100);
-        HealthText.text = Health.ToString();
     }
 
     public void IncreaseDamage(float increasePercentage)
     {
         Damage += Damage * (increasePercentage / 100);
-        DamageText.text = Damage.ToString();
     }
 
     public void IncreaseAttackSpeed(float increasePercentage)
@@ -215,12 +229,7 @@ public class PlayerManager : MonoBehaviour
         if (Health <= 0)
         {
             Health = 0;
-            HealthText.text = Health.ToString();
             KillPlayer();
-        }
-        else
-        {
-            HealthText.text = Health.ToString();
         }
     }
 

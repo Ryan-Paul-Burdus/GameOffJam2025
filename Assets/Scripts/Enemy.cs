@@ -36,6 +36,11 @@ public class Enemy : MonoBehaviour
             {
                 HealthSlider.gameObject.SetActive(true);
             }
+
+            else if (health >= MaxHealth)
+            {
+                HealthSlider.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -60,7 +65,13 @@ public class Enemy : MonoBehaviour
     {
         if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
         {
+            agent.isStopped = true;
             return;
+        }
+
+        if (agent.isStopped)
+        {
+            agent.isStopped = false;
         }
 
         Vector3 direction = (Player.transform.position - transform.position).normalized;
@@ -73,6 +84,11 @@ public class Enemy : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
+        {
+            return;
+        }
+
         // Check if the agent is moving to avoid errors when stationary
         if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
         {
