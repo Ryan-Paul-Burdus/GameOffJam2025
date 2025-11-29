@@ -40,5 +40,10 @@ public class Bullet : MonoBehaviour
             EnemyManager.Instance.TakeDamage(collision.gameObject);
             Destroy(gameObject);
         }
+
+        else if (collision.CompareTag("Map Obstacle"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

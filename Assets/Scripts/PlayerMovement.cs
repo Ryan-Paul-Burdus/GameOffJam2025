@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context">The input manager action</param>
     public void MoveMouse(InputAction.CallbackContext context)
     {
-        if (PickupManager.Instance.PickupUIVisibile)
+        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
         {
             return;
         }

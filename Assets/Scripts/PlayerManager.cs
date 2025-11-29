@@ -48,9 +48,9 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Movement")]
     public float MoveSpeed = 2f;
-    public float DashSpeed = 10f;
-    public float DashDuration = 0.1f;
-    public float DashCooldown = 1f;
+    public float DashSpeed = 15f;
+    public float DashDuration = 0.2f;
+    public float DashCooldown = 5f;
 
     [Header("Attacks")]
     public GameObject AttackAreaObject;
@@ -60,10 +60,10 @@ public class PlayerManager : MonoBehaviour
     [Header("Bullets")]
     public GameObject BulletPrefab;
     public bool canAttack = true;
-    public float BulletSpeed = 7f;
+    public float BulletSpeed = 10f;
     public float ProjectileScale = 1f;
     public int TotalProjectileCount = 1;
-    public float SpreadAngle = 60f;
+    public float SpreadAngle = 50f;
 
     #endregion Properties
 

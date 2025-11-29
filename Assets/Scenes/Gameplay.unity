@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 86549582}
   m_Layer: 0
   m_Name: Obstacle (3)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 87972230}
   m_Layer: 0
   m_Name: Obstacle (4)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1948,7 +1948,7 @@ GameObject:
   - component: {fileID: 235954925}
   m_Layer: 0
   m_Name: Obstacle (9)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2978,7 +2978,7 @@ GameObject:
   - component: {fileID: 392635316}
   m_Layer: 0
   m_Name: Obstacle (2)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -3620,9 +3620,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6e7724e5756524047aef109fe9fe12b2, type: 2}
   PowerupHolder: {fileID: 150924041}
   PowerupSpawnHolder: {fileID: 1329244359}
-  MaxPowerupsAllowedOnMap: 30
+  MaxPowerupsAllowedOnMap: 50
   CurrentPowerupsOnMap: 0
-  PowerupSpawnCooldown: 2
+  PowerupSpawnCooldown: 3
 --- !u!1 &440200591
 GameObject:
   m_ObjectHideFlags: 0
@@ -6448,7 +6448,7 @@ GameObject:
   - component: {fileID: 778893697}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -6873,7 +6873,7 @@ GameObject:
   - component: {fileID: 814689076}
   m_Layer: 0
   m_Name: Obstacle (14)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -7134,7 +7134,7 @@ GameObject:
   - component: {fileID: 840409959}
   m_Layer: 0
   m_Name: Obstacle (10)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -7728,7 +7728,7 @@ GameObject:
   - component: {fileID: 936496654}
   m_Layer: 0
   m_Name: Obstacle (15)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -8632,7 +8632,7 @@ GameObject:
   - component: {fileID: 1069327999}
   m_Layer: 0
   m_Name: Obstacle (17)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -9139,7 +9139,7 @@ GameObject:
   - component: {fileID: 1108407891}
   m_Layer: 0
   m_Name: Obstacle (12)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -10059,7 +10059,7 @@ GameObject:
   - component: {fileID: 1274503150}
   m_Layer: 0
   m_Name: Obstacle (8)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -11619,7 +11619,7 @@ GameObject:
   - component: {fileID: 1508460943}
   m_Layer: 0
   m_Name: Obstacle (1)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -12723,7 +12723,7 @@ GameObject:
   - component: {fileID: 1661562217}
   m_Layer: 0
   m_Name: Obstacle (16)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -13785,7 +13785,7 @@ GameObject:
   - component: {fileID: 1784335400}
   m_Layer: 0
   m_Name: Obstacle (13)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -15452,7 +15452,7 @@ GameObject:
   - component: {fileID: 1950826739}
   m_Layer: 0
   m_Name: Obstacle (5)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -15907,7 +15907,7 @@ GameObject:
   - component: {fileID: 1984879384}
   m_Layer: 0
   m_Name: Obstacle (7)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -16296,7 +16296,7 @@ MonoBehaviour:
   - Location: {fileID: 782218634}
     IsWithinPlayArea: 1
   EnemyHolder: {fileID: 486176994}
-  SpawnCooldown: 2.5
+  WaveNumber: 1
   DamageIndicatorPrefab: {fileID: 5383796887495990168, guid: 5c1b680478de1e9489ee34d04d782ea2, type: 3}
 --- !u!1 &2035118597
 GameObject:
@@ -16312,7 +16312,7 @@ GameObject:
   - component: {fileID: 2035118601}
   m_Layer: 0
   m_Name: Obstacle (6)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -16683,18 +16683,18 @@ MonoBehaviour:
   HealthSlider: {fileID: 889275400}
   MaxHealth: 100
   MoveSpeed: 2
-  DashSpeed: 10
-  DashDuration: 0.1
-  DashCooldown: 1
+  DashSpeed: 15
+  DashDuration: 0.2
+  DashCooldown: 5
   AttackAreaObject: {fileID: 645167809}
   AttackCooldown: 1.5
   AttackAreaOfSize: 0.2
   BulletPrefab: {fileID: 614781361733633110, guid: 375148644d5cf08408542a7bd34dff96, type: 3}
   canAttack: 1
-  BulletSpeed: 7
+  BulletSpeed: 10
   ProjectileScale: 1
   TotalProjectileCount: 1
-  SpreadAngle: 60
+  SpreadAngle: 50
 --- !u!1 &2042991826
 GameObject:
   m_ObjectHideFlags: 0
@@ -16905,7 +16905,7 @@ GameObject:
   - component: {fileID: 2064175517}
   m_Layer: 0
   m_Name: Obstacle (11)
-  m_TagString: Untagged
+  m_TagString: Map Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

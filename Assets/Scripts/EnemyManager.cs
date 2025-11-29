@@ -20,9 +20,18 @@ public class EnemyManager : MonoBehaviour
     public EnemySpawnLocation[] EnemySpawnLocations;
     public Transform EnemyHolder;
 
-    private bool canSpawn = true;
-    public float SpawnCooldown = 2.5f;
+    [Header("Spawning")]
+    public int WaveNumber = 1;
 
+    private float CooldownBetweenWaves = 25f;
+    private float CooldownBetweenEnemySpawns = 10f;
+    private int TimesToSpawnEnemiesInCurentWave = 5;
+    private int EnemiesToSpawnAtOnce = 5;
+    private int totalEnemiesInWave;
+    private bool canSpawnEnemy = true;
+    private bool canSpawnWave = true;
+
+    [Header("Damage")]
     public GameObject DamageIndicatorPrefab;
 
     private void Awake()
@@ -33,6 +42,8 @@ public class EnemyManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
     }
 
     private void Update()
@@ -42,38 +53,73 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        if (canSpawn)
+        if (canSpawnWave)
         {
-            StartCoroutine(SpawnEnemyCoroutine());
+            if (WaveNumber % 10 == 0)
+            {
+                // Spawn a boss wave
+            }
+            else
+            {
+                // Spawn a normal wave
+                StartCoroutine(SpawnEnemyWave());
+            }   
         }
     }
 
     #region Methods
 
-    public IEnumerator SpawnEnemyCoroutine()
+    public IEnumerator SpawnEnemyWave()
     {
-        canSpawn = false;
-
-        EnemySpawnLocation[] possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToArray();
-
+        canSpawnWave = false;
+        int enemiesSpawnedThisWave = 0;
         
-
-        if (possibleLocationsToSpawn.Length > 0)
+        // Keep spawning enemies 
+        while (enemiesSpawnedThisWave < totalEnemiesInWave)
         {
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position, out hit, 10f, NavMesh.AllAreas))
+            if (canSpawnEnemy)
             {
-                GameObject enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], EnemyHolder);
-                enemy.GetComponent<Enemy>().agent.Warp(hit.position);
+                StartCoroutine(SpawnEnemyCoroutine(EnemiesToSpawnAtOnce));
+                enemiesSpawnedThisWave += EnemiesToSpawnAtOnce;
             }
+            yield return new WaitForSeconds(CooldownBetweenEnemySpawns);
+        }
+        
+        // Increase values at the end of the wave
+        EnemiesToSpawnAtOnce = Mathf.FloorToInt(EnemiesToSpawnAtOnce * 1.2f);
+        totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
 
-            //Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)],
-            //possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Length)].Location.position,
-            //Quaternion.identity);
+        yield return new WaitForSeconds(CooldownBetweenWaves);
+
+        WaveNumber++;
+        canSpawnWave = true;
+    }
+
+    public IEnumerator SpawnEnemyCoroutine(int numberOfEnemiesToSpawn)
+    {
+        canSpawnEnemy = false;
+
+        List<EnemySpawnLocation> possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToList();
+
+        if (possibleLocationsToSpawn.Count > 0)
+        {
+            for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+            {
+                NavMeshHit hit;
+                EnemySpawnLocation location = possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Count)];
+
+                if (NavMesh.SamplePosition(location.Location.position, out hit, 15f, NavMesh.AllAreas))
+                {
+                    GameObject enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], EnemyHolder);
+                    enemy.GetComponent<Enemy>().agent.Warp(hit.position);
+                }
+
+                possibleLocationsToSpawn.Remove(location);
+            }
         }
 
-        yield return new WaitForSeconds(SpawnCooldown);
-        canSpawn = true;
+        yield return new WaitForSeconds(CooldownBetweenEnemySpawns);
+        canSpawnEnemy = true;
     }
 
     public void TakeDamage(GameObject enemyObject)

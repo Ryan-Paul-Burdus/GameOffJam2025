@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 { 
     public NavMeshAgent agent;
-    
     public GameObject Player;
-
     public Slider HealthSlider;
 
     [Header("Animations")]
@@ -16,12 +14,12 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private int animationIndex = 0;
     private float timer;
-    public float timeInterval = 0.25f;
+    private float timeInterval = 0.25f;
 
     [Header("Enemy properties")]
-    private float moveSpeed = 1f;
-    public float MaxHealth = 50f;
-    public float Damage = 10f;
+    public float MaxHealth = 20f;
+    public float Damage = 20f;
+    private float moveSpeed = 1.2f;
 
     private float health;
     public float Health

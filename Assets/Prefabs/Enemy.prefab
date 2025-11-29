@@ -191,9 +191,8 @@ MonoBehaviour:
   - {fileID: -544849617, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
   - {fileID: 655111276, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
   - {fileID: 1799876838, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
-  timeInterval: 0.25
-  MaxHealth: 50
-  Damage: 10
+  MaxHealth: 20
+  Damage: 20
 --- !u!50 &6093589468862293477
 Rigidbody2D:
   serializedVersion: 5
