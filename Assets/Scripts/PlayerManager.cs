@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,6 @@ public class PlayerManager : MonoBehaviour
     [Header("Health")]
     public Slider HealthSlider;
     public float MaxHealth = 100f;
-
     private float health;
     public float Health
     {
@@ -58,6 +58,20 @@ public class PlayerManager : MonoBehaviour
     public float ProjectileScale = 1f;
     public int TotalProjectileCount = 1;
     public float SpreadAngle = 50f;
+
+    [Header("Score")]
+    public TextMeshProUGUI ScoreText;
+    private int score = 0;
+    public int Score
+    {
+        get => score;
+        set
+        {
+            score = value;
+            ScoreText.text = score.ToString();
+        }
+    }
+   
 
     #endregion Properties
 
