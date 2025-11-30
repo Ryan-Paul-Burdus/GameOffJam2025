@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dash")]
     public bool IsDashing;
-    public DashAbility DashAbility;
+    public AbilityObject DashAbility;
     private TrailRenderer dashTrailRenderer;
 
     private float timeCurrentlyDashing = 0;
@@ -37,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 timeCurrentlyDashing = 0;
                 IsDashing = false;
-                DashAbility.IsDashCoolingDown = true;
+                DashAbility.IsCoolingDown = true;
             }
         }
         else
@@ -73,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context">The input manager action</param>
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && !IsDashing && !DashAbility.IsDashCoolingDown)
+        if (context.performed && !IsDashing && !DashAbility.IsCoolingDown)
         {
             IsDashing = true;
         }

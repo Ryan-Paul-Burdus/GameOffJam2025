@@ -1,7 +1,4 @@
-using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,9 +20,6 @@ public class PlayerManager : MonoBehaviour
     private float timer;
     public float timeInterval = 0.15f;
     
-    [Header("Damage")]
-    public float Damage = 10f;
-
     [Header("Health")]
     public Slider HealthSlider;
     public float MaxHealth = 100f;
@@ -53,13 +47,13 @@ public class PlayerManager : MonoBehaviour
     public float DashCooldown = 5f;
 
     [Header("Attacks")]
+    public float Damage = 10f;
     public GameObject AttackAreaObject;
+    private PlayerAttacks playerAttacks;
     public float AttackCooldown = 1.5f;
     public float AttackAreaOfSize = 0.2f;
-    
+
     [Header("Bullets")]
-    public GameObject BulletPrefab;
-    public bool canAttack = true;
     public float BulletSpeed = 10f;
     public float ProjectileScale = 1f;
     public int TotalProjectileCount = 1;
@@ -81,6 +75,9 @@ public class PlayerManager : MonoBehaviour
         spriteRenderer = Player.GetComponent<SpriteRenderer>();
         playerMovement = Player.GetComponent<PlayerMovement>();
         playerMovement.DashAbility.MaxCooldown = DashCooldown;
+
+        playerAttacks = AttackAreaObject.GetComponent<PlayerAttacks>();
+        playerAttacks.WaveAttackAbility.MaxCooldown = AttackCooldown;
 
         HealthSlider.maxValue = MaxHealth;
         Health = MaxHealth;
@@ -130,37 +127,6 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
-
-    #region Enemies
-
-    public IEnumerator AttackEnemyCoroutine(GameObject currentTarget)
-    {
-        canAttack = false;
-
-        float angleStep = SpreadAngle / TotalProjectileCount;
-        float centeringOffset = (SpreadAngle / 2) - (angleStep / 2);
-        float lookRotation = Quaternion.LookRotation(Vector3.forward, (currentTarget.transform.position - Player.transform.position).normalized).eulerAngles.z;
-
-        for (int i = 0; i < TotalProjectileCount; i++)
-        {
-            float currentBulletAngle = angleStep * i;
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, lookRotation + currentBulletAngle - centeringOffset));
-
-            // Fire bullet to enemy
-            GameObject bulletObj = Instantiate(BulletPrefab, Player.transform.position, rotation);
-            bulletObj.transform.localScale = new Vector2(ProjectileScale, ProjectileScale);
-
-            Bullet bullet = bulletObj.GetComponent<Bullet>();
-            bullet.Target = currentTarget;
-        }
-
-        // Startthe cooldown for next shot
-        yield return new WaitForSeconds(AttackCooldown);
-
-        canAttack = true;
-    }
-
-    #endregion Enemies
 
     #region Powerups
 

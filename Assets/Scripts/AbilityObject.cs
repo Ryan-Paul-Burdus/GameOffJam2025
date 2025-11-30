@@ -1,10 +1,8 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class DashAbility : MonoBehaviour
+public class AbilityObject : MonoBehaviour
 {
     public Ability Ability;
 
@@ -14,7 +12,7 @@ public class DashAbility : MonoBehaviour
 
     public float MaxCooldown;
 
-    public bool IsDashCoolingDown;
+    public bool IsCoolingDown;
     private float time = 0;
 
     private void Start()
@@ -33,7 +31,7 @@ public class DashAbility : MonoBehaviour
             return;
         }
 
-        if (IsDashCoolingDown)
+        if (IsCoolingDown)
         {
             CooldownSlider.value = 0;
 
@@ -43,7 +41,7 @@ public class DashAbility : MonoBehaviour
             if (time >= MaxCooldown)
             {
                 time = 0;
-                IsDashCoolingDown = false;
+                IsCoolingDown = false;
             }
         }
     }
