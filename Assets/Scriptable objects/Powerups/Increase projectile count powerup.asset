@@ -16,4 +16,4 @@ MonoBehaviour:
   Description: Adds $ more projectiles
   EffectType: 4
   Amount: 2
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 29d37ebe635fdc6428058e6e788b7be1, type: 3}

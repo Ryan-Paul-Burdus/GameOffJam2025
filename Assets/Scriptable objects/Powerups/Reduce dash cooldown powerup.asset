@@ -16,4 +16,4 @@ MonoBehaviour:
   Description: Reduces dash cooldown by $%
   EffectType: 9
   Amount: 2
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: c49d991f82c8e5249ac7f4e20e654a36, type: 3}

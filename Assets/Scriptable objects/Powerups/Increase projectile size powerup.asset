@@ -16,4 +16,4 @@ MonoBehaviour:
   Description: Increases projectile size by $%
   EffectType: 3
   Amount: 5
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: cbed2ca1c31be984898747dd8519a05b, type: 3}

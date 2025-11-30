@@ -16,4 +16,4 @@ MonoBehaviour:
   Description: Increase move speed by $%
   EffectType: 6
   Amount: 5
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: 10505293c3e437c429db4b54e02e52d8, type: 3}

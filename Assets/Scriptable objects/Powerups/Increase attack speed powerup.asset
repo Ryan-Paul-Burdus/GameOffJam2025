@@ -16,4 +16,4 @@ MonoBehaviour:
   Description: Reduce the attack cooldown by $%
   EffectType: 2
   Amount: 2
-  Image: {fileID: 0}
+  Image: {fileID: 21300000, guid: f731ca929d5586347af3f563e7ba1e68, type: 3}
