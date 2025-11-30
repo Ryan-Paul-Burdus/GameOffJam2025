@@ -42,12 +42,6 @@ public class Fade : MonoBehaviour
         Color spriteColor = spriteRenderer.color;
         float time = 0;
 
-        //while (spriteRenderer.color.a < MaximumOpacity)
-        //{
-        //    spriteRenderer.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, Mathf.MoveTowards(spriteRenderer.color.a, MaximumOpacity, timeToFade * Time.deltaTime));
-        //    yield return null;
-        //}
-
         while (time < timeToFade)
         {
             time +=  Time.deltaTime;
@@ -57,15 +51,4 @@ public class Fade : MonoBehaviour
             yield return null;
         }
     }
-
-    //private IEnumerator FadeOut()
-    //{
-    //    Color spriteColor = spriteRenderer.color;
-
-    //    while (spriteRenderer.color.a > MinimumOpacity)
-    //    {
-    //        spriteRenderer.color = new Color(spriteColor.r, spriteColor.g, spriteColor.b, Mathf.MoveTowards(spriteRenderer.color.a, MinimumOpacity, timeToFade * Time.deltaTime));
-    //        yield return null;
-    //    }
-    //}
 }

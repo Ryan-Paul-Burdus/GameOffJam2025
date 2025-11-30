@@ -35,8 +35,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") && !EnemyManager.Instance.EnemyTakingDamage)
         {
+            EnemyManager.Instance.EnemyTakingDamage = true;
             EnemyManager.Instance.TakeDamage(collision.gameObject);
             Destroy(gameObject);
         }

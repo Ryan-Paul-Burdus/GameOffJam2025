@@ -2,8 +2,10 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct EnemySpawnLocation
@@ -14,6 +16,8 @@ public struct EnemySpawnLocation
 
 public class EnemyManager : MonoBehaviour
 {
+    #region Properties
+
     public static EnemyManager Instance { get; private set; }
 
     public GameObject[] EnemyPrefabs;
@@ -22,8 +26,8 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Spawning")]
     public int WaveNumber = 1;
+    public bool IsBossWave => WaveNumber % 10 == 0;
 
-    private float CooldownBetweenWaves = 25f;
     private float CooldownBetweenEnemySpawns = 10f;
     private int TimesToSpawnEnemiesInCurentWave = 5;
     private int EnemiesToSpawnAtOnce = 5;
@@ -31,8 +35,44 @@ public class EnemyManager : MonoBehaviour
     private bool canSpawnEnemy = true;
     private bool canSpawnWave = true;
 
+    [Header("Wave slider properties")]
+    public TextMeshProUGUI WaveText;
+    public Slider WaveSlider;
+
+    [SerializeField] private int enemiesLeftInWave;
+    public int EnemiesLeftInWave
+    {
+        get => enemiesLeftInWave;
+        set
+        {
+            enemiesLeftInWave = value;
+            WaveSlider.value = enemiesLeftInWave;
+
+            int numberNeededToShowEnemiesLeft = Mathf.CeilToInt((totalEnemiesInWave / 100.0f) * 20.0f);
+
+            if (enemiesLeftInWave < numberNeededToShowEnemiesLeft)
+            {
+                WaveText.text = $"{enemiesLeftInWave} remaining";
+
+                if (!WaveText.enabled)
+                {
+                    WaveText.enabled = true;
+                }
+            }
+            else if (WaveText.enabled)
+            {
+                WaveText.enabled = false;
+            }
+        }
+    }
+
     [Header("Damage")]
     public GameObject DamageIndicatorPrefab;
+    public bool EnemyTakingDamage = false;
+
+    #endregion Properties
+
+    #region Unity methods
 
     private void Awake()
     {
@@ -44,6 +84,8 @@ public class EnemyManager : MonoBehaviour
         Instance = this;
 
         totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
+        WaveSlider.maxValue = totalEnemiesInWave;
+        EnemiesLeftInWave = totalEnemiesInWave;
     }
 
     private void Update()
@@ -53,28 +95,46 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
+        // Increase values at the end of the wave
+        if (EnemiesLeftInWave <= 0)
+        {
+            if (!IsBossWave)
+            {
+                EnemiesToSpawnAtOnce = Mathf.FloorToInt(EnemiesToSpawnAtOnce * 1.2f);
+                totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
+                WaveSlider.maxValue = totalEnemiesInWave;
+                EnemiesLeftInWave = totalEnemiesInWave;
+                WaveNumber++;
+            }
+
+            canSpawnWave = true;
+        }
+
+        // Start next wave if possible
         if (canSpawnWave)
         {
-            if (WaveNumber % 10 == 0)
+            if (IsBossWave)
             {
-                // Spawn a boss wave
+                // Spawn a boss wave 
             }
             else
             {
                 // Spawn a normal wave
                 StartCoroutine(SpawnEnemyWave());
-            }   
+            }
         }
     }
 
+    #endregion Unity methods
+
     #region Methods
 
-    public IEnumerator SpawnEnemyWave()
+    private IEnumerator SpawnEnemyWave()
     {
         canSpawnWave = false;
-        int enemiesSpawnedThisWave = 0;
-        
+
         // Keep spawning enemies 
+        int enemiesSpawnedThisWave = 0;
         while (enemiesSpawnedThisWave < totalEnemiesInWave)
         {
             if (canSpawnEnemy)
@@ -84,18 +144,9 @@ public class EnemyManager : MonoBehaviour
             }
             yield return new WaitForSeconds(CooldownBetweenEnemySpawns);
         }
-        
-        // Increase values at the end of the wave
-        EnemiesToSpawnAtOnce = Mathf.FloorToInt(EnemiesToSpawnAtOnce * 1.2f);
-        totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
-
-        yield return new WaitForSeconds(CooldownBetweenWaves);
-
-        WaveNumber++;
-        canSpawnWave = true;
     }
 
-    public IEnumerator SpawnEnemyCoroutine(int numberOfEnemiesToSpawn)
+    private IEnumerator SpawnEnemyCoroutine(int numberOfEnemiesToSpawn)
     {
         canSpawnEnemy = false;
 
@@ -136,8 +187,17 @@ public class EnemyManager : MonoBehaviour
 
         if (enemyScript.Health <= 0)
         {
-            Destroy(enemyObject);
+            KillEnemy(enemyObject);
         }
+
+        EnemyTakingDamage = false;
+    }
+
+    public void KillEnemy(GameObject enemyObject)
+    {
+        Destroy(enemyObject);
+
+        EnemiesLeftInWave--;
     }
 
     #endregion Methods

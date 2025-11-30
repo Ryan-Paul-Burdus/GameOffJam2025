@@ -8,8 +8,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Dash")]
     public bool IsDashing;
-    private bool canDash = true;
+    public DashAbility DashAbility;
     private TrailRenderer dashTrailRenderer;
+
+    private float timeCurrentlyDashing = 0;
 
     private void Awake()
     {
@@ -24,18 +26,28 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        /// Stuff that can be done whilst dashing goes here
-
         if (IsDashing)
         {
-            return;
+            timeCurrentlyDashing += Time.deltaTime;
+
+            // Dash
+            rb.linearVelocity = transform.up * PlayerManager.Instance.DashSpeed;
+
+            if (timeCurrentlyDashing >= PlayerManager.Instance.DashDuration)
+            {
+                timeCurrentlyDashing = 0;
+                IsDashing = false;
+                DashAbility.IsDashCoolingDown = true;
+            }
         }
-
-        /// Stuff we dont want happening when dashing goes here
-
-        // Moves the player forward all the time
-        rb.linearVelocity = transform.up * PlayerManager.Instance.MoveSpeed;
+        else
+        {
+            // Moves the player forward all the time
+            rb.linearVelocity = transform.up * PlayerManager.Instance.MoveSpeed;
+        }
     }
+
+    #region Inputs
 
     /// <summary>
     /// rotates the player to look at the mouse
@@ -43,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context">The input manager action</param>
     public void MoveMouse(InputAction.CallbackContext context)
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
+        if (PickupManager.Instance.PickupUIVisibile)
         {
             return;
         }
@@ -55,44 +67,17 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
     }
 
-    #region Dash
-
     /// <summary>
     /// Dashes the player in the direction the player is looking
     /// </summary>
     /// <param name="context">The input manager action</param>
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && canDash)
+        if (context.performed && !IsDashing && !DashAbility.IsDashCoolingDown)
         {
-            StartCoroutine(DashCoroutine());
+            IsDashing = true;
         }
     }
 
-    /// <summary>
-    /// Coroutine containing the dash functionality
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator DashCoroutine()
-    {
-        IsDashing = true;
-        canDash = false;
-        //dashTrailRenderer.emitting = true;
-
-        // Dash
-        rb.linearVelocity = transform.up * PlayerManager.Instance.DashSpeed;
-
-        yield return new WaitForSeconds(PlayerManager.Instance.DashDuration);
-
-        // Stop the dash movement
-        rb.linearVelocity = transform.up * PlayerManager.Instance.MoveSpeed;
-
-        IsDashing = false;
-        //dashTrailRenderer.emitting = false;
-
-        yield return new WaitForSeconds(PlayerManager.Instance.DashCooldown);
-        canDash = true;
-    }
-
-    #endregion Dash
+    #endregion Inputs
 }

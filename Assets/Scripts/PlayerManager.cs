@@ -80,9 +80,10 @@ public class PlayerManager : MonoBehaviour
 
         spriteRenderer = Player.GetComponent<SpriteRenderer>();
         playerMovement = Player.GetComponent<PlayerMovement>();
+        playerMovement.DashAbility.MaxCooldown = DashCooldown;
 
-        Health = MaxHealth;
         HealthSlider.maxValue = MaxHealth;
+        Health = MaxHealth;
     }
 
     private void Update()
@@ -212,6 +213,7 @@ public class PlayerManager : MonoBehaviour
     public void ReduceDashCooldown(float reductionPrecentage)
     {
         DashCooldown -= DashCooldown * (reductionPrecentage / 100);
+        playerMovement.DashAbility.MaxCooldown = DashCooldown;
     }
 
     #endregion Powerups
