@@ -197,6 +197,7 @@ public class EnemyManager : MonoBehaviour
         Destroy(enemyObject);
 
         EnemiesLeftInWave--;
+        PlayerManager.Instance.Score += Mathf.FloorToInt(enemyObject.GetComponent<Enemy>().MaxHealth);
     }
 
     #endregion Methods

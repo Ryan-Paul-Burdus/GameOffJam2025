@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,8 @@ public class MenuManager : MonoBehaviour
     public GameObject PauseMenu;
     public GameObject OptionsMenu;
     public GameObject GameOverMenu;
+
+    public TextMeshProUGUI ScoreText;
 
     public bool IsPaused;
 
@@ -64,9 +67,11 @@ public class MenuManager : MonoBehaviour
         GameOverMenu.SetActive(false);
     }
 
-    public void OpenGameOverMenu()
+    public void OpenGameOverMenu(string scoreText)
     {
         IsPaused = true;
+
+        ScoreText.text = scoreText;
 
         PauseMenu.SetActive(false);
         OptionsMenu.SetActive(false);

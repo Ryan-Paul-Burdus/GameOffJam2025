@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public enum PickupType
 {
@@ -116,6 +117,8 @@ public class PickupManager : MonoBehaviour
 
     public void TakeCurrentPowerupEffect()
     {
+        PlayerManager.Instance.Score += (10 * EnemyManager.Instance.WaveNumber);
+
         // Use the powerup to do its effect
         switch (currentPowerup.EffectType)
         {
