@@ -55,6 +55,12 @@ public class Enemy : MonoBehaviour
     {
         Player = PlayerManager.Instance.Player;
 
+        // Fit stats to the latest multiplier when spawned
+        float statsMultiplier = EnemyManager.Instance.enemyStatsMultiplier;
+        MaxHealth *= statsMultiplier;
+        Damage *= statsMultiplier;
+        moveSpeed *= statsMultiplier;
+
         Health = MaxHealth;
         HealthSlider.maxValue = MaxHealth;
     }

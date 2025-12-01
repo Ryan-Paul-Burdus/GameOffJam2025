@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Spawning")]
     public int WaveNumber = 1;
-    public bool IsBossWave => WaveNumber % 10 == 0;
+    public bool IsBossWave => false;// WaveNumber % 10 == 0;
 
     private float CooldownBetweenEnemySpawns = 10f;
     private int TimesToSpawnEnemiesInCurentWave = 5;
@@ -33,6 +33,8 @@ public class EnemyManager : MonoBehaviour
     private int totalEnemiesInWave;
     private bool canSpawnEnemy = true;
     private bool canSpawnWave = true;
+
+    public float enemyStatsMultiplier => 1f + (0.15f * (WaveNumber - 1));
 
     [Header("Wave slider properties")]
     public TextMeshProUGUI WaveText;
@@ -162,6 +164,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     GameObject enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], EnemyHolder);
                     enemy.GetComponent<Enemy>().agent.Warp(hit.position);
+
                 }
 
                 possibleLocationsToSpawn.Remove(location);
