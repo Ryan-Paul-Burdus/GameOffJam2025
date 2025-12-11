@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject DamageIndicatorPrefab;
 
     [Header("Animations")]
-    public List<Sprite> PlayerAnimationSprites;
+    public Sprite[] PlayerAnimationSprites;
     private SpriteRenderer spriteRenderer;
     private int animationIndex = 0;
     private float timer;
@@ -131,7 +131,7 @@ public class PlayerManager : MonoBehaviour
                     timer = 0f;
                     animationIndex++;
 
-                    if (animationIndex >= PlayerAnimationSprites.Count)
+                    if (animationIndex >= PlayerAnimationSprites.Length)
                     {
                         animationIndex = 0;
                     }

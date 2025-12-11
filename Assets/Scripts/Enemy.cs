@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -10,7 +9,7 @@ public class Enemy : MonoBehaviour
     public Slider HealthSlider;
 
     [Header("Animations")]
-    public List<Sprite> EnemyAnimationSprites;
+    public Sprite[] EnemyAnimationSprites;
     private SpriteRenderer spriteRenderer;
     private int animationIndex = 0;
     private float timer;
@@ -120,7 +119,7 @@ public class Enemy : MonoBehaviour
                 timer = 0f;
                 animationIndex++;
 
-                if (animationIndex >= EnemyAnimationSprites.Count)
+                if (animationIndex >= EnemyAnimationSprites.Length)
                 {
                     animationIndex = 0;
                 }

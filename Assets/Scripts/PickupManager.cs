@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public enum PickupType
 {
@@ -24,6 +23,8 @@ public class PowerupSpawnLocation
 
 public class PickupManager : MonoBehaviour
 {
+    private static readonly WaitForSeconds waitFor2Seconds = new(2f);
+
     public static PickupManager Instance { get; private set; }
 
     [Header("Pickup UI")]
@@ -85,7 +86,7 @@ public class PickupManager : MonoBehaviour
         for (int i = 0; i < numberToSpawn; i++)
         {
             // Gets an un-occupied spawn location and spawns it
-            List<PowerupSpawnLocation> availablePowerupLocations = PowerupSpawnLocations.Where(x => !x.Occupied).ToList();
+            PowerupSpawnLocation[] availablePowerupLocations = PowerupSpawnLocations.Where(x => !x.Occupied).ToArray();
             int randomSpawnIndex = Random.Range(0, availablePowerupLocations.Count());
             PowerupSpawnLocation randomSpawnLocation = availablePowerupLocations[randomSpawnIndex];
 
@@ -109,7 +110,7 @@ public class PickupManager : MonoBehaviour
         PickupUIVisibile = true;
         PickupUI.ShowPowerupDisplay(currentPowerup);
 
-        yield return new WaitForSeconds(2f);
+        yield return waitFor2Seconds;
 
         // Make the space unoccupied after pickup
         PowerupSpawnLocations[spawnLocationIndex].Occupied = false;
