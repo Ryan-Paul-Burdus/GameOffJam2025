@@ -6300,7 +6300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afba6cec7793b1f4ea78c911254432d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttacks
-  BulletPrefab: {fileID: 614781361733633110, guid: 375148644d5cf08408542a7bd34dff96, type: 3}
+  BulletScript: {fileID: 6197671427631154429, guid: 375148644d5cf08408542a7bd34dff96, type: 3}
   CanAttack: 1
   AttackCoolingDown: 0
   WaveAttackAbility: {fileID: 1934130115}
@@ -17958,6 +17958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   Player: {fileID: 489129305}
+  PlayerMovement: {fileID: 0}
   DamageIndicatorPrefab: {fileID: 5383796887495990168, guid: 5c1b680478de1e9489ee34d04d782ea2, type: 3}
   PlayerAnimationSprites:
   - {fileID: 1254505685, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
@@ -17977,6 +17978,7 @@ MonoBehaviour:
   DashCooldown: 5
   Damage: 10
   AttackAreaObject: {fileID: 645167809}
+  PlayerAttacks: {fileID: 0}
   AttackCooldown: 1.5
   AttackAreaOfSize: 0.2
   BulletSpeed: 10

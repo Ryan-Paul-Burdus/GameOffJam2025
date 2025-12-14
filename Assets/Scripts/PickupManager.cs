@@ -102,6 +102,7 @@ public class PickupManager : MonoBehaviour
         // Get a random powerup to pick up and pick it up
         currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
         Time.timeScale = 0.0f;
+        PlayerManager.Instance.PlayerMovement.IsDashing = false;
         PickupUI.ShowPowerupDisplay(currentPowerup);
 
         yield return waitFor2Seconds;

@@ -2,21 +2,29 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public GameObject Target;
-
     private Rigidbody2D rb;
-    private float bulletLifetime = 2.0f;
+
+    private float maxBulletLifetime = 2.0f;
+    private float bulletLifetime;
+
+    private PlayerAttacks playerAttacksScript;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAttacksScript = PlayerManager.Instance.PlayerAttacks;
+    }
+
+    private void OnEnable()
+    {
+        bulletLifetime = maxBulletLifetime;
     }
 
     private void Update()
     {
         if (bulletLifetime <= 0f)
         {
-            Destroy(gameObject);
+            playerAttacksScript.BulletPool.Release(this);
         }
         else
         {
@@ -32,12 +40,12 @@ public class Bullet : MonoBehaviour
         {
             EnemyManager.Instance.EnemyTakingDamage = true;
             EnemyManager.Instance.TakeDamage(collision.gameObject);
-            Destroy(gameObject);
+            playerAttacksScript.BulletPool.Release(this);
         }
 
         else if (collision.CompareTag("Map Obstacle"))
         {
-            Destroy(gameObject);
+            playerAttacksScript.BulletPool.Release(this);
         }
     }
 }

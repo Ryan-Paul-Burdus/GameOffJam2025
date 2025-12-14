@@ -1,15 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
+using static UnityEditor.FilePathAttribute;
 
 public class PlayerAttacks : MonoBehaviour
 {
     private readonly List<GameObject> targets = new();
     private GameObject currentTarget;
 
-    public GameObject BulletPrefab;
+    public Bullet BulletScript;
+    public ObjectPool<Bullet> BulletPool;
+
+    private int currentBulletIndex;
+    private float angleStep;
+    private float centeringOffset;
+    private float lookRotation;
+
     public bool CanAttack = true;
     public bool AttackCoolingDown;
     public AbilityObject WaveAttackAbility;
+
+    private void Awake()
+    {
+        BulletPool = new ObjectPool<Bullet>(CreatePooledBulletObject, GetBulletFromPool, ReturnBulletToPool, null, false, 50, 500);
+    }
 
     private void Update()
     {
@@ -17,24 +31,18 @@ public class PlayerAttacks : MonoBehaviour
         if (!WaveAttackAbility.IsCoolingDown && targets.Count > 0)
         {
             FindNearestEnemy();
+
             if (currentTarget != null)
             {
 
-                float angleStep = PlayerManager.Instance.SpreadAngle / PlayerManager.Instance.TotalProjectileCount;
-                float centeringOffset = (PlayerManager.Instance.SpreadAngle / 2) - (angleStep / 2);
-                float lookRotation = Quaternion.LookRotation(Vector3.forward, (currentTarget.transform.position - PlayerManager.Instance.Player.transform.position).normalized).eulerAngles.z;
+                angleStep = PlayerManager.Instance.SpreadAngle / PlayerManager.Instance.TotalProjectileCount;
+                centeringOffset = (PlayerManager.Instance.SpreadAngle / 2) - (angleStep / 2);
+                lookRotation = Quaternion.LookRotation(Vector3.forward, (currentTarget.transform.position - PlayerManager.Instance.Player.transform.position).normalized).eulerAngles.z;
 
                 for (int i = 0; i < PlayerManager.Instance.TotalProjectileCount; i++)
                 {
-                    float currentBulletAngle = angleStep * i;
-                    Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, lookRotation + currentBulletAngle - centeringOffset));
-
-                    // Fire bullet to enemy
-                    GameObject bulletObj = Instantiate(BulletPrefab, PlayerManager.Instance.Player.transform.position, rotation);
-                    bulletObj.transform.localScale = new Vector2(PlayerManager.Instance.ProjectileScale, PlayerManager.Instance.ProjectileScale);
-
-                    Bullet bullet = bulletObj.GetComponent<Bullet>();
-                    bullet.Target = currentTarget;
+                    currentBulletIndex = i;
+                    BulletPool.Get();
                 }
 
                 WaveAttackAbility.IsCoolingDown = true;
@@ -59,6 +67,34 @@ public class PlayerAttacks : MonoBehaviour
     }
 
     #region Methods
+
+    #region Bullet pooling
+
+    private Bullet CreatePooledBulletObject()
+    {
+        Bullet bullet = Instantiate(BulletScript, PlayerManager.Instance.Player.transform.position, Quaternion.identity);
+        bullet.gameObject.SetActive(false);
+
+        return bullet;
+    }
+
+    private void GetBulletFromPool(Bullet bullet)
+    {
+        float currentBulletAngle = angleStep * currentBulletIndex;
+        Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, lookRotation + currentBulletAngle - centeringOffset));
+
+        bullet.transform.SetPositionAndRotation(PlayerManager.Instance.Player.transform.position, rotation);
+        bullet.transform.localScale = new Vector2(PlayerManager.Instance.ProjectileScale, PlayerManager.Instance.ProjectileScale);
+
+        bullet.gameObject.SetActive(true);
+    }
+
+    private void ReturnBulletToPool(Bullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+
+    #endregion Bullet pooling
 
     private void FindNearestEnemy()
     {

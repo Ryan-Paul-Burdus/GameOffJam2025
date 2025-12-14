@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance { get; private set; }
 
     public GameObject Player;
-    private PlayerMovement playerMovement;
+    public PlayerMovement PlayerMovement;
 
     public GameObject DamageIndicatorPrefab;
 
@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Attacks")]
     public float Damage = 10f;
     public GameObject AttackAreaObject;
-    private PlayerAttacks playerAttacks;
+    public PlayerAttacks PlayerAttacks;
     public float AttackCooldown = 1.5f;
     public float AttackAreaOfSize = 0.2f;
 
@@ -87,11 +87,11 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
 
         spriteRenderer = Player.GetComponent<SpriteRenderer>();
-        playerMovement = Player.GetComponent<PlayerMovement>();
-        playerMovement.DashAbility.MaxCooldown = DashCooldown;
+        PlayerMovement = Player.GetComponent<PlayerMovement>();
+        PlayerMovement.DashAbility.MaxCooldown = DashCooldown;
 
-        playerAttacks = AttackAreaObject.GetComponent<PlayerAttacks>();
-        playerAttacks.WaveAttackAbility.MaxCooldown = AttackCooldown;
+        PlayerAttacks = AttackAreaObject.GetComponent<PlayerAttacks>();
+        PlayerAttacks.WaveAttackAbility.MaxCooldown = AttackCooldown;
 
         HealthSlider.maxValue = MaxHealth;
         Health = MaxHealth;
@@ -109,7 +109,7 @@ public class PlayerManager : MonoBehaviour
 
     private void UpdatePlayerAnimation()
     {
-        if (playerMovement.IsDashing)
+        if (PlayerMovement.IsDashing)
         {
             spriteRenderer.sprite = PlayerAnimationSprites[0];
             timer = 0f;
@@ -188,7 +188,7 @@ public class PlayerManager : MonoBehaviour
     public void ReduceDashCooldown(float reductionPrecentage)
     {
         DashCooldown -= DashCooldown * (reductionPrecentage / 100);
-        playerMovement.DashAbility.MaxCooldown = DashCooldown;
+        PlayerMovement.DashAbility.MaxCooldown = DashCooldown;
     }
 
     #endregion Powerups
