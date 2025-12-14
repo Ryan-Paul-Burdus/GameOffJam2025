@@ -70,21 +70,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (agent.isStopped)
-        {
-            agent.isStopped = false;
-        }
-
-        Vector3 direction = (Player.transform.position - transform.position).normalized;
-
         // Move and rotate towards the player
         agent.SetDestination(Player.transform.position);
 
         UpdateEnemyAnimation();
-    }
 
-    private void LateUpdate()
-    {
         // Check if the agent is moving to avoid errors when stationary
         if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
         {
