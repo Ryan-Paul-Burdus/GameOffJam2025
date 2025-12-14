@@ -3932,7 +3932,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupManager
   PickupUI: {fileID: 1800728633}
-  PickupUIVisibile: 0
   PowerupPrefab: {fileID: 4753844287256152286, guid: 1099e88a70894d741a847700fcca4191, type: 3}
   AllPowerups:
   - {fileID: 11400000, guid: 21498a23971257d4db2fcd1e0a507ca4, type: 2}
@@ -4422,6 +4421,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 85c7df33-2516-4b47-8bf7-cb37157a9981
     m_ActionName: 'UI/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2021836070}
+        m_TargetAssemblyTypeName: EnemyManager, Assembly-CSharp
+        m_MethodName: GetEnemy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7fe49a71-1538-4cf9-b552-0c56e4889e3a
+    m_ActionName: 'Player/Spawn enemy[/Keyboard/g]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5962,7 +5977,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &619695580
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13327,7 +13342,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &1508545086
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17516,8 +17531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235c5b66885361b4aafa0f23a2f08f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  EnemyPrefabs:
-  - {fileID: 2601751489040015235, guid: 057a5e5a4c3a0774dae4eb89b4b7750e, type: 3}
+  EnemyScript: {fileID: 3991573335741748580, guid: 057a5e5a4c3a0774dae4eb89b4b7750e, type: 3}
   EnemySpawnLocations:
   - Location: {fileID: 1009748596}
     IsWithinPlayArea: 1

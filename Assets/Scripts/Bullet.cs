@@ -14,12 +14,6 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            rb.linearVelocity = Vector3.zero;
-            return;
-        }
-
         if (bulletLifetime <= 0f)
         {
             Destroy(gameObject);

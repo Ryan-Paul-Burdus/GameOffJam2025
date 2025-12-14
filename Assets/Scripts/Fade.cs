@@ -22,11 +22,6 @@ public class Fade : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         if (spriteRenderer.color.a == MaximumOpacity)
         {
             StartCoroutine(FadeTo(MinimumOpacity));

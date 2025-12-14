@@ -29,7 +29,6 @@ public class PickupManager : MonoBehaviour
 
     [Header("Pickup UI")]
     public PickupUIDisplay PickupUI;
-    public bool PickupUIVisibile = false;
 
     [Header("Powerups")]
     public GameObject PowerupPrefab;
@@ -66,11 +65,6 @@ public class PickupManager : MonoBehaviour
 
     private void Update()
     {
-        if (PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         if (canSpawnPowerup && CurrentPowerupsOnMap < MaxPowerupsAllowedOnMap)
         {
             StartCoroutine(SpawnPowerupCoroutine(1));
@@ -107,7 +101,7 @@ public class PickupManager : MonoBehaviour
     {
         // Get a random powerup to pick up and pick it up
         currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
-        PickupUIVisibile = true;
+        Time.timeScale = 0.0f;
         PickupUI.ShowPowerupDisplay(currentPowerup);
 
         yield return waitFor2Seconds;

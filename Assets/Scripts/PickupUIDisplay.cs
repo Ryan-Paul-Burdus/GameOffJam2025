@@ -41,13 +41,13 @@ public class PickupUIDisplay : MonoBehaviour
         }
 
         gameObject.SetActive(false);
-        PickupManager.Instance.PickupUIVisibile = false;
+        Time.timeScale = 1.0f;
     }
 
     public void PressCancelButton()
     {
         gameObject.SetActive(false);
-        PickupManager.Instance.PickupUIVisibile = false;
+        Time.timeScale = 1.0f;
         Debug.Log("Declined powerup");
     }
 

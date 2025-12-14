@@ -99,11 +99,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         // Baked player animations
         UpdatePlayerAnimation();
     }

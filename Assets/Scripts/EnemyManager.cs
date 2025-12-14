@@ -4,6 +4,8 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -19,9 +21,11 @@ public class EnemyManager : MonoBehaviour
 
     public static EnemyManager Instance { get; private set; }
 
-    public GameObject[] EnemyPrefabs;
+    public Enemy EnemyScript;
     public EnemySpawnLocation[] EnemySpawnLocations;
     public Transform EnemyHolder;
+    public ObjectPool<Enemy> EnemyPool;
+
 
     [Header("Spawning")]
     public int WaveNumber = 1;
@@ -31,7 +35,6 @@ public class EnemyManager : MonoBehaviour
     private int TimesToSpawnEnemiesInCurentWave = 5;
     private int EnemiesToSpawnAtOnce = 5;
     private int totalEnemiesInWave;
-    private bool canSpawnEnemy = true;
     private bool canSpawnWave = true;
 
     public float enemyStatsMultiplier => 1f + (0.15f * (WaveNumber - 1));
@@ -87,15 +90,14 @@ public class EnemyManager : MonoBehaviour
         totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
         WaveSlider.maxValue = totalEnemiesInWave;
         EnemiesLeftInWave = totalEnemiesInWave;
+
+        //TODO: Make multiple pools, for each enemy type (when needed)
+        // Set up the enemy pool and its events
+        EnemyPool = new ObjectPool<Enemy>(CreatePooledEnemyObject, GetEnemyFromPool, ReturnEnemyToPool, null, false, 200, 50_000);
     }
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         // Increase values at the end of the wave
         if (EnemiesLeftInWave <= 0)
         {
@@ -121,7 +123,7 @@ public class EnemyManager : MonoBehaviour
             else
             {
                 // Spawn a normal wave
-                StartCoroutine(SpawnEnemyWave());
+                StartCoroutine(SpawnEnemyWaveCoroutine());
             }
         }
     }
@@ -130,7 +132,59 @@ public class EnemyManager : MonoBehaviour
 
     #region Methods
 
-    private IEnumerator SpawnEnemyWave()
+    #region Spawning
+
+    #region Enemy pooling
+
+    /// <summary>
+    /// Spawning callback for testing
+    /// </summary>
+    /// <param name="context"></param>
+    public void GetEnemy(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EnemyPool.Get();
+        }
+    }
+
+    /// <summary>
+    /// Called when enemyPool.Get is called and there is no more instances available, thus creating anew enemy to add to the pool
+    /// </summary>
+    /// <returns>A new enemy for the pool</returns>
+    private Enemy CreatePooledEnemyObject()
+    {
+        Enemy enemy = Instantiate(EnemyScript, EnemyHolder);
+        enemy.gameObject.SetActive(false);
+        return enemy;
+    }
+
+    /// <summary>
+    /// Called when enemyPool.Get is called, enables and spawns an enemy from the pool
+    /// </summary>
+    /// <param name="enemy">The enemy to spawn</param>
+    private void GetEnemyFromPool(Enemy enemy)
+    {
+        SetSpawnedEnemyLocation(enemy);
+        enemy.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Called when enemyPool.Release is called, sends back enemy to the pool
+    /// </summary>
+    /// <param name="enemy">The enemy to return to the pool</param>
+    private void ReturnEnemyToPool(Enemy enemy)
+    {
+        enemy.gameObject.SetActive(false);
+    }
+
+    #endregion Enemy pooling
+
+    /// <summary>
+    /// Spawns a wave of enemies
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SpawnEnemyWaveCoroutine()
     {
         canSpawnWave = false;
 
@@ -138,43 +192,44 @@ public class EnemyManager : MonoBehaviour
         int enemiesSpawnedThisWave = 0;
         while (enemiesSpawnedThisWave < totalEnemiesInWave)
         {
-            if (canSpawnEnemy)
+            for (int i = 0; i < EnemiesToSpawnAtOnce; i++)
             {
-                StartCoroutine(SpawnEnemyCoroutine(EnemiesToSpawnAtOnce));
-                enemiesSpawnedThisWave += EnemiesToSpawnAtOnce;
+                EnemyPool.Get();
             }
+            enemiesSpawnedThisWave += EnemiesToSpawnAtOnce;
+
             yield return new WaitForSeconds(CooldownBetweenEnemySpawns);
         }
     }
 
-    private IEnumerator SpawnEnemyCoroutine(int numberOfEnemiesToSpawn)
+    /// <summary>
+    /// Sets the spawn point of an enemy to a random spawn point where possible 
+    /// </summary>
+    /// <param name="enemy">The enemy to spawn</param>
+    private void SetSpawnedEnemyLocation(Enemy enemy)
     {
-        canSpawnEnemy = false;
-
         List<EnemySpawnLocation> possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToList();
 
         if (possibleLocationsToSpawn.Count > 0)
         {
-            for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+            NavMeshHit hit;
+            EnemySpawnLocation location = possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Count)];
+
+            if (NavMesh.SamplePosition(location.Location.position, out hit, 15f, NavMesh.AllAreas))
             {
-                NavMeshHit hit;
-                EnemySpawnLocation location = possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Count)];
-
-                if (NavMesh.SamplePosition(location.Location.position, out hit, 15f, NavMesh.AllAreas))
-                {
-                    GameObject enemy = Instantiate(EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)], EnemyHolder);
-                    enemy.GetComponent<Enemy>().agent.Warp(hit.position);
-
-                }
-
-                possibleLocationsToSpawn.Remove(location);
+                enemy.agent.Warp(hit.position);
             }
         }
-
-        yield return new WaitForSeconds(CooldownBetweenEnemySpawns);
-        canSpawnEnemy = true;
     }
 
+    #endregion Spawning
+
+    #region Damage
+
+    /// <summary>
+    /// Damages an enemy 
+    /// </summary>
+    /// <param name="enemyObject">The enemy object being damaged</param>
     public void TakeDamage(GameObject enemyObject)
     {
         float damage = PlayerManager.Instance.Damage;
@@ -189,19 +244,25 @@ public class EnemyManager : MonoBehaviour
 
         if (enemyScript.Health <= 0)
         {
-            KillEnemy(enemyObject);
+            KillEnemy(enemyScript);
         }
 
         EnemyTakingDamage = false;
     }
 
-    public void KillEnemy(GameObject enemyObject)
+    /// <summary>
+    /// Kills an enemy
+    /// </summary>
+    /// <param name="enemy"></param>
+    public void KillEnemy(Enemy enemy)
     {
-        Destroy(enemyObject);
+        EnemyPool.Release(enemy);
 
         EnemiesLeftInWave--;
-        PlayerManager.Instance.Score += Mathf.FloorToInt(enemyObject.GetComponent<Enemy>().MaxHealth);
+        PlayerManager.Instance.Score += Mathf.FloorToInt(enemy.MaxHealth);
     }
+
+    #endregion Damage
 
     #endregion Methods
 }

@@ -7,11 +7,6 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         transform.position = new Vector3(TargetToFollow.position.x, TargetToFollow.position.y, -10f);
     }
 }

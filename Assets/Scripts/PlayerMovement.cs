@@ -19,12 +19,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            rb.linearVelocity = Vector3.zero;
-            return;
-        }
-
         if (IsDashing)
         {
             timeCurrentlyDashing += Time.deltaTime;
@@ -54,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context">The input manager action</param>
     public void MoveMouse(InputAction.CallbackContext context)
     {
-        if (PickupManager.Instance.PickupUIVisibile)
+        if (MenuManager.Instance.IsPaused)
         {
             return;
         }

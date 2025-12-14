@@ -24,11 +24,6 @@ public class DamageIndicator : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         timer += Time.deltaTime;
 
         float fraction = TextLifetime / 2f;

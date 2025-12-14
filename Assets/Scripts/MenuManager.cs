@@ -41,6 +41,7 @@ public class MenuManager : MonoBehaviour
     public void OpenPauseMenu()
     {
         IsPaused = true;
+        Time.timeScale = 0.0f;
 
         PauseMenu.SetActive(true);
         OptionsMenu.SetActive(false);
@@ -58,6 +59,7 @@ public class MenuManager : MonoBehaviour
         GameOverMenu.SetActive(false);
 
         IsPaused = false;
+        Time.timeScale = 1.0f;
     }
 
     public void OpenOptionsMenu()

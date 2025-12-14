@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
@@ -53,7 +54,10 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         Player = PlayerManager.Instance.Player;
+    }
 
+    private void OnEnable()
+    {
         // Fit stats to the latest multiplier when spawned
         float statsMultiplier = EnemyManager.Instance.enemyStatsMultiplier;
         MaxHealth *= statsMultiplier;
@@ -66,12 +70,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            agent.isStopped = true;
-            return;
-        }
-
         if (agent.isStopped)
         {
             agent.isStopped = false;
@@ -87,11 +85,6 @@ public class Enemy : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         // Check if the agent is moving to avoid errors when stationary
         if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
         {

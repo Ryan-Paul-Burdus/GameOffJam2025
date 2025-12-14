@@ -13,11 +13,6 @@ public class PlayerAttacks : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         // Attack an enemy if possible
         if (!WaveAttackAbility.IsCoolingDown && targets.Count > 0)
         {

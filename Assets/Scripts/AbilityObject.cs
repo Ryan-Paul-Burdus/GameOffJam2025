@@ -26,11 +26,6 @@ public class AbilityObject : MonoBehaviour
 
     private void Update()
     {
-        if (PickupManager.Instance.PickupUIVisibile || MenuManager.Instance.IsPaused)
-        {
-            return;
-        }
-
         if (IsCoolingDown)
         {
             CooldownSlider.value = 0;
