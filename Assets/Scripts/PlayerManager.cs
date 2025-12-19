@@ -12,8 +12,6 @@ public class PlayerManager : MonoBehaviour
     public GameObject Player;
     public PlayerMovement PlayerMovement;
 
-    public GameObject DamageIndicatorPrefab;
-
     [Header("Animations")]
     public Sprite[] PlayerAnimationSprites;
     private SpriteRenderer spriteRenderer;
@@ -197,10 +195,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DamagePlayer(float damageAmount)
     {
-        // Create damage indicator
-        DamageIndicator indicator = Instantiate(DamageIndicatorPrefab, Player.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-        indicator.SetDamageText(damageAmount);
-
+        DamageIndicatorManager.Instance.SpawnDamageIndicator(Player, damageAmount);
         Health -= damageAmount;
 
         if (Health <= 0)

@@ -74,7 +74,6 @@ public class PlayerAttacks : MonoBehaviour
     {
         Bullet bullet = Instantiate(BulletScript, PlayerManager.Instance.Player.transform.position, Quaternion.identity);
         bullet.gameObject.SetActive(false);
-
         return bullet;
     }
 

@@ -72,6 +72,7 @@ public class MenuManager : MonoBehaviour
     public void OpenGameOverMenu(string scoreText)
     {
         IsPaused = true;
+        Time.timeScale = 0.0f;
 
         ScoreText.text = scoreText;
 

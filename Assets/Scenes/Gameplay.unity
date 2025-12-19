@@ -452,6 +452,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 47193705}
+  - component: {fileID: 47193711}
+  - component: {fileID: 47193710}
+  - component: {fileID: 47193709}
+  - component: {fileID: 47193708}
+  - component: {fileID: 47193707}
+  - component: {fileID: 47193706}
   m_Layer: 0
   m_Name: MANAGERS
   m_TagString: Untagged
@@ -471,13 +477,236 @@ Transform:
   m_LocalPosition: {x: -0, y: 48.4, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2021836069}
-  - {fileID: 2042852699}
-  - {fileID: 433282720}
-  - {fileID: 1810415874}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &47193706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47193704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6f60af1c981b84c9fed42c80138381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageIndicatorManager
+  DamageIndicatorScript: {fileID: 2537269934144206112, guid: 3b57fdeeae9cb4543b0859fc8153177e, type: 3}
+--- !u!114 &47193707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47193704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe6cc4fdc2df8748a3e9456d759cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuManager
+  GameplayMenuHolder: {fileID: 1394431645}
+  PauseMenu: {fileID: 1027812503}
+  OptionsMenu: {fileID: 1621482318}
+  GameOverMenu: {fileID: 805625946}
+  ScoreText: {fileID: 102395628}
+  IsPaused: 0
+--- !u!114 &47193708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47193704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7785ab7a6602ef42ad59e2c4c66320c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupManager
+  PickupUI: {fileID: 1800728633}
+  PowerupPrefab: {fileID: 4753844287256152286, guid: 1099e88a70894d741a847700fcca4191, type: 3}
+  AllPowerups:
+  - {fileID: 11400000, guid: 21498a23971257d4db2fcd1e0a507ca4, type: 2}
+  - {fileID: 11400000, guid: 7c9992241f53c5547b401cd2ca9a4a8c, type: 2}
+  - {fileID: 11400000, guid: bf092e12c36bca74a87f017d7be9dde6, type: 2}
+  - {fileID: 11400000, guid: c39211b01c53d6249bf9f35e02604ba3, type: 2}
+  - {fileID: 11400000, guid: 2d6b7f0f9e2734840aad665e61b853fe, type: 2}
+  - {fileID: 11400000, guid: 40fb12dcd6a4740488f2b4d035515c58, type: 2}
+  - {fileID: 11400000, guid: 5768fbe434648b840a1725c987767b47, type: 2}
+  - {fileID: 11400000, guid: ad709f68905b7b2438f2ffd242d84cb9, type: 2}
+  - {fileID: 11400000, guid: 50f07ec826bb0c04e972bf9520ceed66, type: 2}
+  - {fileID: 11400000, guid: 6e7724e5756524047aef109fe9fe12b2, type: 2}
+  PowerupHolder: {fileID: 150924041}
+  PowerupSpawnHolder: {fileID: 1329244359}
+  MaxPowerupsAllowedOnMap: 50
+  CurrentPowerupsOnMap: 0
+  PowerupSpawnCooldown: 3
+--- !u!114 &47193709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47193704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4e223e4b42466469d7a5b396cfd6af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  Player: {fileID: 489129305}
+  PlayerMovement: {fileID: 0}
+  PlayerAnimationSprites:
+  - {fileID: 1254505685, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  - {fileID: 499430455, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  - {fileID: -875456225, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  - {fileID: 1702113439, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  - {fileID: -509246751, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  - {fileID: 720609143, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  - {fileID: -2070806255, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  - {fileID: -641532434, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
+  timeInterval: 0.15
+  HealthSlider: {fileID: 889275400}
+  MaxHealth: 100
+  MoveSpeed: 2
+  DashSpeed: 15
+  DashDuration: 0.2
+  DashCooldown: 5
+  Damage: 10
+  AttackAreaObject: {fileID: 645167809}
+  PlayerAttacks: {fileID: 0}
+  AttackCooldown: 1.5
+  AttackAreaOfSize: 0.2
+  BulletSpeed: 10
+  ProjectileScale: 1
+  TotalProjectileCount: 1
+  SpreadAngle: 50
+  ScoreText: {fileID: 188679872}
+--- !u!114 &47193710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47193704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235c5b66885361b4aafa0f23a2f08f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  EnemyScript: {fileID: 3991573335741748580, guid: 057a5e5a4c3a0774dae4eb89b4b7750e, type: 3}
+  EnemySpawnLocations:
+  - Location: {fileID: 1009748596}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 1358950630}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 760356950}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 47000944}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 463397958}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 440200592}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 2035993951}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 1527273546}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 1903036837}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 2119412433}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 587218441}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 982653892}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 390270513}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 620707383}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 205699361}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 304606065}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 651344819}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 1204681486}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 686212016}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 2141814030}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 751412961}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 969593304}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 1767361007}
+    IsWithinPlayArea: 1
+  - Location: {fileID: 782218634}
+    IsWithinPlayArea: 1
+  EnemyHolder: {fileID: 486176994}
+  WaveNumber: 1
+  WaveText: {fileID: 1488628613}
+  WaveSlider: {fileID: 2124264986}
+  enemiesLeftInWave: 0
+  EnemyTakingDamage: 0
+--- !u!114 &47193711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47193704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 02ee72a998efdf14aa57e9f37c8ebab1, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b5ea680-eab1-4f53-8fb5-7c6cc2e4cc4f
+    m_ActionName: 'Player/MousePosition[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b2e15cc-50d0-43d6-a4a3-0547c670eb7e
+    m_ActionName: 'Player/Dash[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: TogglePauseMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 85c7df33-2516-4b47-8bf7-cb37157a9981
+    m_ActionName: 'UI/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7fe49a71-1538-4cf9-b552-0c56e4889e3a
+    m_ActionName: 'Player/Spawn enemy[/Keyboard/g]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &73926266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,7 +3078,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1810415873}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenMainMenuButton
         m_Mode: 1
@@ -3887,68 +4116,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &433282719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 433282720}
-  - component: {fileID: 433282721}
-  m_Layer: 0
-  m_Name: PickupManager
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &433282720
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433282719}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 47193705}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &433282721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433282719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7785ab7a6602ef42ad59e2c4c66320c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PickupManager
-  PickupUI: {fileID: 1800728633}
-  PowerupPrefab: {fileID: 4753844287256152286, guid: 1099e88a70894d741a847700fcca4191, type: 3}
-  AllPowerups:
-  - {fileID: 11400000, guid: 21498a23971257d4db2fcd1e0a507ca4, type: 2}
-  - {fileID: 11400000, guid: 7c9992241f53c5547b401cd2ca9a4a8c, type: 2}
-  - {fileID: 11400000, guid: bf092e12c36bca74a87f017d7be9dde6, type: 2}
-  - {fileID: 11400000, guid: c39211b01c53d6249bf9f35e02604ba3, type: 2}
-  - {fileID: 11400000, guid: 2d6b7f0f9e2734840aad665e61b853fe, type: 2}
-  - {fileID: 11400000, guid: 40fb12dcd6a4740488f2b4d035515c58, type: 2}
-  - {fileID: 11400000, guid: 5768fbe434648b840a1725c987767b47, type: 2}
-  - {fileID: 11400000, guid: ad709f68905b7b2438f2ffd242d84cb9, type: 2}
-  - {fileID: 11400000, guid: 50f07ec826bb0c04e972bf9520ceed66, type: 2}
-  - {fileID: 11400000, guid: 6e7724e5756524047aef109fe9fe12b2, type: 2}
-  PowerupHolder: {fileID: 150924041}
-  PowerupSpawnHolder: {fileID: 1329244359}
-  MaxPowerupsAllowedOnMap: 50
-  CurrentPowerupsOnMap: 0
-  PowerupSpawnCooldown: 3
 --- !u!1 &440200591
 GameObject:
   m_ObjectHideFlags: 0
@@ -4423,7 +4590,7 @@ MonoBehaviour:
     m_ActionName: 'UI/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2021836070}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EnemyManager, Assembly-CSharp
         m_MethodName: GetEnemy
         m_Mode: 0
@@ -9934,7 +10101,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1810415873}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenPauseMenu
         m_Mode: 1
@@ -10435,7 +10602,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1810415873}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenMainMenuButton
         m_Mode: 1
@@ -11552,7 +11719,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1810415873}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: ClosePauseMenu
         m_Mode: 1
@@ -14912,7 +15079,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1810415873}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenMainMenuButton
         m_Mode: 1
@@ -15690,111 +15857,6 @@ MonoBehaviour:
   ActionButtonText: {fileID: 1565624487}
   CancelButton: {fileID: 520759982}
   CancelButtonText: {fileID: 659787350}
---- !u!1 &1810415872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1810415874}
-  - component: {fileID: 1810415873}
-  - component: {fileID: 1810415875}
-  m_Layer: 0
-  m_Name: MenuManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!114 &1810415873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1810415872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffe6cc4fdc2df8748a3e9456d759cf37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MenuManager
-  GameplayMenuHolder: {fileID: 1394431645}
-  PauseMenu: {fileID: 1027812503}
-  OptionsMenu: {fileID: 1621482318}
-  GameOverMenu: {fileID: 805625946}
-  ScoreText: {fileID: 102395628}
-  IsPaused: 0
---- !u!4 &1810415874
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1810415872}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 47193705}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1810415875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1810415872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 02ee72a998efdf14aa57e9f37c8ebab1, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8b5ea680-eab1-4f53-8fb5-7c6cc2e4cc4f
-    m_ActionName: 'Player/MousePosition[/Mouse/position]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3b2e15cc-50d0-43d6-a4a3-0547c670eb7e
-    m_ActionName: 'Player/Dash[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1810415873}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: TogglePauseMenu
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 85c7df33-2516-4b47-8bf7-cb37157a9981
-    m_ActionName: 'UI/Pause[/Keyboard/escape]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: UI
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1811523560
 GameObject:
   m_ObjectHideFlags: 0
@@ -16464,7 +16526,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1810415873}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenOptionsMenu
         m_Mode: 1
@@ -17487,107 +17549,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1329244359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2021836068
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2021836069}
-  - component: {fileID: 2021836070}
-  m_Layer: 0
-  m_Name: Enemy manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &2021836069
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021836068}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 47193705}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2021836070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021836068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235c5b66885361b4aafa0f23a2f08f40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  EnemyScript: {fileID: 3991573335741748580, guid: 057a5e5a4c3a0774dae4eb89b4b7750e, type: 3}
-  EnemySpawnLocations:
-  - Location: {fileID: 1009748596}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 1358950630}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 760356950}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 47000944}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 463397958}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 440200592}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 2035993951}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 1527273546}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 1903036837}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 2119412433}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 587218441}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 982653892}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 390270513}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 620707383}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 205699361}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 304606065}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 651344819}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 1204681486}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 686212016}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 2141814030}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 751412961}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 969593304}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 1767361007}
-    IsWithinPlayArea: 1
-  - Location: {fileID: 782218634}
-    IsWithinPlayArea: 1
-  EnemyHolder: {fileID: 486176994}
-  WaveNumber: 1
-  WaveText: {fileID: 1488628613}
-  WaveSlider: {fileID: 2124264986}
-  enemiesLeftInWave: 0
-  DamageIndicatorPrefab: {fileID: 5383796887495990168, guid: 5c1b680478de1e9489ee34d04d782ea2, type: 3}
-  EnemyTakingDamage: 0
 --- !u!1 &2035118597
 GameObject:
   m_ObjectHideFlags: 0
@@ -17913,79 +17874,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
---- !u!1 &2042852698
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2042852699}
-  - component: {fileID: 2042852700}
-  m_Layer: 0
-  m_Name: PlayerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &2042852699
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042852698}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 47193705}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2042852700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042852698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4e223e4b42466469d7a5b396cfd6af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  Player: {fileID: 489129305}
-  PlayerMovement: {fileID: 0}
-  DamageIndicatorPrefab: {fileID: 5383796887495990168, guid: 5c1b680478de1e9489ee34d04d782ea2, type: 3}
-  PlayerAnimationSprites:
-  - {fileID: 1254505685, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  - {fileID: 499430455, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  - {fileID: -875456225, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  - {fileID: 1702113439, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  - {fileID: -509246751, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  - {fileID: 720609143, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  - {fileID: -2070806255, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  - {fileID: -641532434, guid: 850542206b67f4f4ab339ca03faf8065, type: 3}
-  timeInterval: 0.15
-  HealthSlider: {fileID: 889275400}
-  MaxHealth: 100
-  MoveSpeed: 2
-  DashSpeed: 15
-  DashDuration: 0.2
-  DashCooldown: 5
-  Damage: 10
-  AttackAreaObject: {fileID: 645167809}
-  PlayerAttacks: {fileID: 0}
-  AttackCooldown: 1.5
-  AttackAreaOfSize: 0.2
-  BulletSpeed: 10
-  ProjectileScale: 1
-  TotalProjectileCount: 1
-  SpreadAngle: 50
-  ScoreText: {fileID: 188679872}
 --- !u!1 &2042991826
 GameObject:
   m_ObjectHideFlags: 0

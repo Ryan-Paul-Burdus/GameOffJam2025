@@ -71,7 +71,6 @@ public class EnemyManager : MonoBehaviour
     }
 
     [Header("Damage")]
-    public GameObject DamageIndicatorPrefab;
     public bool EnemyTakingDamage = false;
 
     #endregion Properties
@@ -165,7 +164,19 @@ public class EnemyManager : MonoBehaviour
     /// <param name="enemy">The enemy to spawn</param>
     private void GetEnemyFromPool(Enemy enemy)
     {
-        SetSpawnedEnemyLocation(enemy);
+        List<EnemySpawnLocation> possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToList();
+
+        if (possibleLocationsToSpawn.Count > 0)
+        {
+            NavMeshHit hit;
+            EnemySpawnLocation location = possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Count)];
+
+            if (NavMesh.SamplePosition(location.Location.position, out hit, 15f, NavMesh.AllAreas))
+            {
+                enemy.agent.Warp(hit.position);
+            }
+        }
+
         enemy.gameObject.SetActive(true);
     }
 
@@ -202,26 +213,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets the spawn point of an enemy to a random spawn point where possible 
-    /// </summary>
-    /// <param name="enemy">The enemy to spawn</param>
-    private void SetSpawnedEnemyLocation(Enemy enemy)
-    {
-        List<EnemySpawnLocation> possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToList();
-
-        if (possibleLocationsToSpawn.Count > 0)
-        {
-            NavMeshHit hit;
-            EnemySpawnLocation location = possibleLocationsToSpawn[Random.Range(0, possibleLocationsToSpawn.Count)];
-
-            if (NavMesh.SamplePosition(location.Location.position, out hit, 15f, NavMesh.AllAreas))
-            {
-                enemy.agent.Warp(hit.position);
-            }
-        }
-    }
-
     #endregion Spawning
 
     #region Damage
@@ -232,15 +223,11 @@ public class EnemyManager : MonoBehaviour
     /// <param name="enemyObject">The enemy object being damaged</param>
     public void TakeDamage(GameObject enemyObject)
     {
-        float damage = PlayerManager.Instance.Damage;
-
-        // Create damage indicator
-        DamageIndicator indicator = Instantiate(DamageIndicatorPrefab, enemyObject.transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-        indicator.SetDamageText(damage);
-
         // Do damage to the enemy
         Enemy enemyScript = enemyObject.GetComponent<Enemy>();
+        float damage = PlayerManager.Instance.Damage;
         enemyScript.Health -= damage;
+        DamageIndicatorManager.Instance.SpawnDamageIndicator(enemyObject, damage);
 
         if (enemyScript.Health <= 0)
         {
@@ -257,7 +244,6 @@ public class EnemyManager : MonoBehaviour
     public void KillEnemy(Enemy enemy)
     {
         EnemyPool.Release(enemy);
-
         EnemiesLeftInWave--;
         PlayerManager.Instance.Score += Mathf.FloorToInt(enemy.MaxHealth);
     }
