@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum PickupType
 {
@@ -23,15 +24,15 @@ public class PowerupSpawnLocation
 
 public class PickupManager : MonoBehaviour
 {
-    private static readonly WaitForSeconds waitFor2Seconds = new(2f);
 
     public static PickupManager Instance { get; private set; }
 
     [Header("Pickup UI")]
-    public PickupUIDisplay PickupUI;
+    public GameObject PickupUI;
 
     [Header("Powerups")]
     public GameObject PowerupPrefab;
+    public PowerupDisplay[] PowerupPickupDisplays;
     public Powerup[] AllPowerups;
     public Transform PowerupHolder;
     public Transform PowerupSpawnHolder;
@@ -97,18 +98,24 @@ public class PickupManager : MonoBehaviour
         canSpawnPowerup = true;
     }
 
-    public IEnumerator PickupRandomPowerupCoroutine(int spawnLocationIndex)
+    public void Show3RandomPowerups()
     {
-        // Get a random powerup to pick up and pick it up
-        currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
         Time.timeScale = 0.0f;
         PlayerManager.Instance.PlayerMovement.IsDashing = false;
-        PickupUI.ShowPowerupDisplay(currentPowerup);
 
-        yield return waitFor2Seconds;
+        // Show 3 random powerups
+        List<Powerup> tempPowerupList = AllPowerups.ToList();
+        
+        for (int i = 0; i < 3; i++)
+        {
+            currentPowerup = tempPowerupList[Random.Range(0, tempPowerupList.Count)];
+            PowerupPickupDisplays[i].UpdatePowerupDisplay(currentPowerup);
+            tempPowerupList.Remove(currentPowerup);
+        }
+        PickupUI.SetActive(true);
 
-        // Make the space unoccupied after pickup
-        PowerupSpawnLocations[spawnLocationIndex].Occupied = false;
+        //// Make the space unoccupied after pickup
+        //PowerupSpawnLocations[spawnLocationIndex].Occupied = false;
     }
 
     public void TakeCurrentPowerupEffect()

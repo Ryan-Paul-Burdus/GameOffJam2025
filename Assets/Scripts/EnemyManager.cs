@@ -39,36 +39,7 @@ public class EnemyManager : MonoBehaviour
 
     public float enemyStatsMultiplier => 1f + (0.15f * (WaveNumber - 1));
 
-    [Header("Wave slider properties")]
-    public TextMeshProUGUI WaveText;
-    public Slider WaveSlider;
-
-    [SerializeField] private int enemiesLeftInWave;
-    public int EnemiesLeftInWave
-    {
-        get => enemiesLeftInWave;
-        set
-        {
-            enemiesLeftInWave = value;
-            WaveSlider.value = enemiesLeftInWave;
-
-            int numberNeededToShowEnemiesLeft = Mathf.CeilToInt((totalEnemiesInWave / 100.0f) * 20.0f);
-
-            if (enemiesLeftInWave < numberNeededToShowEnemiesLeft)
-            {
-                WaveText.text = $"{enemiesLeftInWave} remaining";
-
-                if (!WaveText.enabled)
-                {
-                    WaveText.enabled = true;
-                }
-            }
-            else if (WaveText.enabled)
-            {
-                WaveText.enabled = false;
-            }
-        }
-    }
+    public int EnemiesLeftInWave;
 
     [Header("Damage")]
     public bool EnemyTakingDamage = false;
@@ -87,7 +58,6 @@ public class EnemyManager : MonoBehaviour
         Instance = this;
 
         totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
-        WaveSlider.maxValue = totalEnemiesInWave;
         EnemiesLeftInWave = totalEnemiesInWave;
 
         //TODO: Make multiple pools, for each enemy type (when needed)
@@ -104,7 +74,6 @@ public class EnemyManager : MonoBehaviour
             {
                 EnemiesToSpawnAtOnce = Mathf.FloorToInt(EnemiesToSpawnAtOnce * 1.2f);
                 totalEnemiesInWave = EnemiesToSpawnAtOnce * TimesToSpawnEnemiesInCurentWave;
-                WaveSlider.maxValue = totalEnemiesInWave;
                 EnemiesLeftInWave = totalEnemiesInWave;
                 WaveNumber++;
             }
@@ -233,8 +202,6 @@ public class EnemyManager : MonoBehaviour
         {
             KillEnemy(enemyScript);
         }
-
-        EnemyTakingDamage = false;
     }
 
     /// <summary>
@@ -246,6 +213,7 @@ public class EnemyManager : MonoBehaviour
         EnemyPool.Release(enemy);
         EnemiesLeftInWave--;
         PlayerManager.Instance.Score += Mathf.FloorToInt(enemy.MaxHealth);
+        XPManager.Instance.AddXP(10);
     }
 
     #endregion Damage

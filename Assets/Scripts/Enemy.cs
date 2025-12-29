@@ -1,13 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 { 
     public NavMeshAgent agent;
     public GameObject Player;
-    public Slider HealthSlider;
 
     [Header("Animations")]
     public Sprite[] EnemyAnimationSprites;
@@ -21,26 +18,7 @@ public class Enemy : MonoBehaviour
     public float Damage = 20f;
     private float moveSpeed = 1.2f;
 
-    private float health;
-    public float Health
-    {
-        get => health;
-        set
-        {
-            health = value; 
-            HealthSlider.value = health;
-
-            if (!HealthSlider.gameObject.activeSelf && health < MaxHealth)
-            {
-                HealthSlider.gameObject.SetActive(true);
-            }
-
-            else if (health >= MaxHealth)
-            {
-                HealthSlider.gameObject.SetActive(false);
-            }
-        }
-    }
+    public float Health;
 
     private void Start()
     {
@@ -65,7 +43,6 @@ public class Enemy : MonoBehaviour
         moveSpeed *= statsMultiplier;
 
         Health = MaxHealth;
-        HealthSlider.maxValue = MaxHealth;
     }
 
     private void Update()

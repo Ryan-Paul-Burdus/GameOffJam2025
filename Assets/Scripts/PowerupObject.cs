@@ -9,7 +9,7 @@ public class PowerupObject : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             //Pickup powerup
-            StartCoroutine(PickupManager.Instance.PickupRandomPowerupCoroutine(SpawnLocationIndex));
+            PickupManager.Instance.Show3RandomPowerups();
 
             Destroy(gameObject);
         }

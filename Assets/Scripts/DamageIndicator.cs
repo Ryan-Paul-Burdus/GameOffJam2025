@@ -47,7 +47,6 @@ public class DamageIndicator : MonoBehaviour
         {
             timer = 0.0f;
             DamageIndicatorManager.Instance.DamageIndicatorPool.Release(this);
-            Debug.Log("Indicator released from indicator update");
         }
         else if (timer > fraction)
         {

@@ -41,6 +41,7 @@ public class Bullet : MonoBehaviour
             EnemyManager.Instance.EnemyTakingDamage = true;
             EnemyManager.Instance.TakeDamage(collision.gameObject);
             playerAttacksScript.BulletPool.Release(this);
+            EnemyManager.Instance.EnemyTakingDamage = false;
         }
 
         else if (collision.CompareTag("Map Obstacle"))

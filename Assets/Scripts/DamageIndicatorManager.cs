@@ -41,7 +41,6 @@ public class DamageIndicatorManager : MonoBehaviour
     public void SpawnDamageIndicator(GameObject target, float damageAmount)
     {
         DamageIndicator damageIndicator = DamageIndicatorPool.Get();
-        Debug.Log("Indicator got");
         damageIndicator.InitialisePosition(target);
         damageIndicator.DamageText.text = damageAmount.ToString();
     }
