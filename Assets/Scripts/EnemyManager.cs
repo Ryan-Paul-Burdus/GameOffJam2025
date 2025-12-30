@@ -194,8 +194,11 @@ public class EnemyManager : MonoBehaviour
     {
         // Do damage to the enemy
         Enemy enemyScript = enemyObject.GetComponent<Enemy>();
+        enemyScript.DoDamageFlash();
+
         float damage = PlayerManager.Instance.Damage;
         enemyScript.Health -= damage;
+
         DamageIndicatorManager.Instance.SpawnDamageIndicator(enemyObject, damage);
 
         if (enemyScript.Health <= 0)

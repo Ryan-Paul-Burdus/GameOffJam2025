@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject Player;
 
+    private DamageFlash damageFlash;
+
     [Header("Animations")]
     public Sprite[] EnemyAnimationSprites;
     private SpriteRenderer spriteRenderer;
@@ -23,6 +25,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        damageFlash = GetComponent<DamageFlash>();
 
         agent.updateUpAxis = false;
         agent.updateRotation = false;
@@ -87,5 +90,10 @@ public class Enemy : MonoBehaviour
                 spriteRenderer.sprite = EnemyAnimationSprites[animationIndex];
             }
         }
+    }
+
+    public void DoDamageFlash()
+    {
+        damageFlash.DoFlash();
     }
 }

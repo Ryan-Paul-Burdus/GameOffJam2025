@@ -8,13 +8,13 @@ public class XPManager : MonoBehaviour
     public GameObject xpObject;
     private Slider xpSlider;
 
-    public float maxXPValue;
+    public float MaxXPValue = 100.0f;
     public float PlayerXP {  get; private set; }
 
     private void OnEnable()
     {
         xpSlider = xpObject.GetComponent<Slider>();
-        xpSlider.maxValue = maxXPValue;
+        xpSlider.maxValue = MaxXPValue;
     }
 
     private void Awake()
@@ -31,15 +31,22 @@ public class XPManager : MonoBehaviour
     {
         PlayerXP += xpAmount;
 
-        float xpOverflow = PlayerXP - maxXPValue;
+        float xpOverflow = PlayerXP - MaxXPValue;
 
         if (xpOverflow >= 0.0)
         {
             PlayerXP = xpOverflow;
             PickupManager.Instance.Show3RandomPowerups();
+            UpdateMaxXP(MaxXPValue *= 1.1f);
         }
 
         xpSlider.value = PlayerXP;
+    }
+
+    private void UpdateMaxXP(float newMaxXP)
+    {
+        MaxXPValue = newMaxXP;
+        xpSlider.maxValue = newMaxXP;
     }
 
 }

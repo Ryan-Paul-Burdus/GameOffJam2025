@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   xpObject: {fileID: 2124264984}
-  maxXPValue: 100
+  MaxXPValue: 0
 --- !u!1001 &56106879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4198,6 +4198,7 @@ GameObject:
   - component: {fileID: 489129307}
   - component: {fileID: 489129311}
   - component: {fileID: 489129306}
+  - component: {fileID: 489129313}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4397,6 +4398,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7fe49a71-1538-4cf9-b552-0c56e4889e3a
     m_ActionName: 'Player/Spawn enemy[/Keyboard/g]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: afd544cf-6f54-4afe-b177-dd36412ab8f7
+    m_ActionName: 'PowerupPickup/Pickup1[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f0d9cc0-6134-4152-a042-d40de04c5457
+    m_ActionName: 'PowerupPickup/Pickup2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6efff3a9-eb2e-43b2-9e73-509407101f66
+    m_ActionName: 'PowerupPickup/Pickup3[/Keyboard/3]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4439,6 +4452,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.43, y: 1}
   m_Direction: 0
+--- !u!114 &489129313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489129305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8038b026933db438f2f43d3843f0eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
 --- !u!1 &491700548
 GameObject:
   m_ObjectHideFlags: 0

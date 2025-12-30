@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6093589468862293477}
   - component: {fileID: 1377891321892039288}
   - component: {fileID: 8056734564681576596}
+  - component: {fileID: 8979687285306775047}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -110,7 +111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   agent: {fileID: 8056734564681576596}
   Player: {fileID: 0}
-  HealthSlider: {fileID: 0}
   EnemyAnimationSprites:
   - {fileID: 511349911, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
   - {fileID: -544849617, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
@@ -118,6 +118,7 @@ MonoBehaviour:
   - {fileID: 1799876838, guid: b45b4dbd2dd7a264b88c6d520669303b, type: 3}
   MaxHealth: 20
   Damage: 20
+  Health: 0
 --- !u!50 &6093589468862293477
 Rigidbody2D:
   serializedVersion: 5
@@ -204,6 +205,20 @@ NavMeshAgent:
   m_BaseOffset: 0.4375
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8979687285306775047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601751489040015235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8038b026933db438f2f43d3843f0eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.05
 --- !u!1 &3975197517476467700
 GameObject:
   m_ObjectHideFlags: 0
