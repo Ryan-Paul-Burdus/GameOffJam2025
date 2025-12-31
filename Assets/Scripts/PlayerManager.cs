@@ -47,14 +47,14 @@ public class PlayerManager : MonoBehaviour
     public float Damage = 10f;
     public GameObject AttackAreaObject;
     public PlayerAttacks PlayerAttacks;
-    public float AttackCooldown = 1.5f;
+    public float AttackCooldown = 1f;
     public float AttackAreaOfSize = 0.2f;
 
     [Header("Bullets")]
-    public float BulletSpeed = 10f;
+    public float BulletSpeed = 15f;
     public float ProjectileScale = 1f;
     public int TotalProjectileCount = 1;
-    public float SpreadAngle = 50f;
+    public float SpreadAngle = 30f;
 
     [Header("Score")]
     public TextMeshProUGUI ScoreText;

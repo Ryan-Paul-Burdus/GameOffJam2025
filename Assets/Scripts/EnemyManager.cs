@@ -31,7 +31,7 @@ public class EnemyManager : MonoBehaviour
     public int WaveNumber = 1;
     public bool IsBossWave => false;// WaveNumber % 10 == 0;
 
-    private float CooldownBetweenEnemySpawns = 10f;
+    private float CooldownBetweenEnemySpawns = 5f;
     private int TimesToSpawnEnemiesInCurentWave = 5;
     private int EnemiesToSpawnAtOnce = 5;
     private int totalEnemiesInWave;

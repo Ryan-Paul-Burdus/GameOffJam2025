@@ -503,12 +503,12 @@ MonoBehaviour:
   Damage: 10
   AttackAreaObject: {fileID: 645167809}
   PlayerAttacks: {fileID: 0}
-  AttackCooldown: 1.5
+  AttackCooldown: 1
   AttackAreaOfSize: 0.2
-  BulletSpeed: 10
+  BulletSpeed: 15
   ProjectileScale: 1
   TotalProjectileCount: 1
-  SpreadAngle: 50
+  SpreadAngle: 30
   ScoreText: {fileID: 188679872}
 --- !u!114 &47193710
 MonoBehaviour:
@@ -4464,7 +4464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc8038b026933db438f2f43d3843f0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  material: {fileID: -876546973899608171, guid: 4a7e5367bb8718b4d990f27d38bbff5a, type: 3}
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashDuration: 0.1
 --- !u!1 &491700548

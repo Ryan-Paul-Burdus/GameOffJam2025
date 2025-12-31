@@ -42,7 +42,6 @@ public class PickupManager : MonoBehaviour
 
     private List<PowerupSpawnLocation> PowerupSpawnLocations = new();
     private bool canSpawnPowerup = true;
-    private Powerup currentPowerup;
 
 
     private void Awake()
@@ -108,7 +107,7 @@ public class PickupManager : MonoBehaviour
         
         for (int i = 0; i < 3; i++)
         {
-            currentPowerup = tempPowerupList[Random.Range(0, tempPowerupList.Count)];
+            Powerup currentPowerup = tempPowerupList[Random.Range(0, tempPowerupList.Count)];
             PowerupPickupDisplays[i].UpdatePowerupDisplay(currentPowerup);
             tempPowerupList.Remove(currentPowerup);
         }
@@ -118,7 +117,7 @@ public class PickupManager : MonoBehaviour
         //PowerupSpawnLocations[spawnLocationIndex].Occupied = false;
     }
 
-    public void TakeCurrentPowerupEffect()
+    public void TakeCurrentPowerupEffect(Powerup currentPowerup)
     {
         PlayerManager.Instance.Score += (10 * EnemyManager.Instance.WaveNumber);
 

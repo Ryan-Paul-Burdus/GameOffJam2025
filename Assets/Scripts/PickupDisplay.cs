@@ -10,13 +10,16 @@ public class PowerupDisplay : MonoBehaviour
 
     private PickupType CurrentPickupType;
 
-    public void UpdatePowerupDisplay(Powerup powerup)
+    private Powerup powerup;
+
+    public void UpdatePowerupDisplay(Powerup newPowerup)
     {
         CurrentPickupType = PickupType.Powerup;
+        powerup = newPowerup;
 
-        PowerupName.text = powerup.Name;
-        PowerupImage.sprite = powerup.Image;
-        PowerupDescription.text = powerup.Description.Replace("$", powerup.Amount.ToString());
+        PowerupName.text = newPowerup.Name;
+        PowerupImage.sprite = newPowerup.Image;
+        PowerupDescription.text = newPowerup.Description.Replace("$", newPowerup.Amount.ToString());
     }
 
     #region Buttons
@@ -27,7 +30,7 @@ public class PowerupDisplay : MonoBehaviour
         switch (CurrentPickupType)
         {
             case PickupType.Powerup:
-                PickupManager.Instance.TakeCurrentPowerupEffect();
+                PickupManager.Instance.TakeCurrentPowerupEffect(powerup);
                 break;
         }
 
