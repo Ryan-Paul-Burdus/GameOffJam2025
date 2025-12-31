@@ -203,6 +203,7 @@ public class EnemyManager : MonoBehaviour
 
         if (enemyScript.Health <= 0)
         {
+            enemyScript.ResetDamageFlash();
             KillEnemy(enemyScript);
         }
     }

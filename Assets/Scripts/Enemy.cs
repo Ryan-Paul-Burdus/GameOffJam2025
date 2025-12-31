@@ -96,4 +96,9 @@ public class Enemy : MonoBehaviour
     {
         damageFlash.DoFlash();
     }
+
+    public void ResetDamageFlash()
+    {
+        damageFlash.ResetFlash();
+    }
 }
