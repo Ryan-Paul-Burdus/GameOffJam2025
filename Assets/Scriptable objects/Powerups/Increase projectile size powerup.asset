@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: PROJECTILE SIZE+
   Description: Increases projectile size by $%
-  EffectType: 3
-  Amount: 5
   Image: {fileID: 21300000, guid: cbed2ca1c31be984898747dd8519a05b, type: 3}
+  EffectType: 3
+  CommonAmount: 5
+  UncommonAmount: 10
+  EpicAmount: 20
+  LegendaryAmount: 35

@@ -449,7 +449,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupManager
   PickupUI: {fileID: 1800728628}
-  PowerupPrefab: {fileID: 4753844287256152286, guid: 1099e88a70894d741a847700fcca4191, type: 3}
+  CommonRarityColor: {r: 1, g: 1, b: 1, a: 1}
+  UncommonRarityColor: {r: 0.3987629, g: 0.8207547, b: 0.45904744, a: 1}
+  EpicRarityColor: {r: 0.7722392, g: 0.17528482, b: 0.9528302, a: 1}
+  LegendaryRarityColor: {r: 0.8962264, g: 0.66995424, b: 0.16487186, a: 1}
   PowerupPickupDisplays:
   - {fileID: 128275355}
   - {fileID: 1472362760}
@@ -465,11 +468,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad709f68905b7b2438f2ffd242d84cb9, type: 2}
   - {fileID: 11400000, guid: 50f07ec826bb0c04e972bf9520ceed66, type: 2}
   - {fileID: 11400000, guid: 6e7724e5756524047aef109fe9fe12b2, type: 2}
-  PowerupHolder: {fileID: 150924041}
-  PowerupSpawnHolder: {fileID: 1329244359}
-  MaxPowerupsAllowedOnMap: 50
-  CurrentPowerupsOnMap: 0
-  PowerupSpawnCooldown: 3
+  ItemPrefab: {fileID: 3035825226967716692, guid: 1099e88a70894d741a847700fcca4191, type: 3}
+  ItemsHolder: {fileID: 150924041}
+  ItemSpawnPointHolder: {fileID: 1329244359}
+  MaxItemsAllowedOnMap: 50
+  CurrentItemsOnMap: 0
+  ItemSpawnCooldown: 3
 --- !u!114 &47193709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1611,7 +1615,7 @@ GameObject:
   m_Component:
   - component: {fileID: 150924041}
   m_Layer: 0
-  m_Name: PowerupHolder
+  m_Name: Item holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4132,7 +4136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 486176994}
   m_Layer: 0
-  m_Name: EnemyHolder
+  m_Name: Enemy holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4384,7 +4388,7 @@ MonoBehaviour:
     m_ActionName: 'UI/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 47193710}
         m_TargetAssemblyTypeName: EnemyManager, Assembly-CSharp
         m_MethodName: GetEnemy
         m_Mode: 0
@@ -4410,6 +4414,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6efff3a9-eb2e-43b2-9e73-509407101f66
     m_ActionName: 'PowerupPickup/Pickup3[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 47193708}
+        m_TargetAssemblyTypeName: PickupManager, Assembly-CSharp
+        m_MethodName: Open3RandomPowerups
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 415fcaa5-982b-402e-9c43-e763a4ab6e88
+    m_ActionName: 'Player/ShowRandom3Powerups[/Keyboard/p]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -11229,7 +11249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1329244359}
   m_Layer: 0
-  m_Name: Powerup spawn points
+  m_Name: Item spawn points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

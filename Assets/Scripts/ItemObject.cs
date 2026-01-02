@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerupObject : MonoBehaviour
+public class ItemObject : MonoBehaviour
 {
     public int SpawnLocationIndex;
 
@@ -8,8 +8,7 @@ public class PowerupObject : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //Pickup powerup
-            PickupManager.Instance.Show3RandomPowerups();
+            //Pickup item
 
             Destroy(gameObject);
         }

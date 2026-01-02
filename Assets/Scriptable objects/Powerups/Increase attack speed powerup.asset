@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: ATK CDR-
   Description: Reduce the attack cooldown by $%
-  EffectType: 2
-  Amount: 2
   Image: {fileID: 21300000, guid: f731ca929d5586347af3f563e7ba1e68, type: 3}
+  EffectType: 2
+  CommonAmount: 5
+  UncommonAmount: 10
+  EpicAmount: 20
+  LegendaryAmount: 35

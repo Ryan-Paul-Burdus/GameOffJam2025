@@ -655,6 +655,7 @@ MonoBehaviour:
   PowerupName: {fileID: 3827341258241477999}
   PowerupImage: {fileID: 4526442433000254682}
   PowerupDescription: {fileID: 8201491564103419538}
+  PowerupPanelBackground: {fileID: 370877204413402855}
 --- !u!114 &3594883882201310471
 MonoBehaviour:
   m_ObjectHideFlags: 0

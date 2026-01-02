@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Powerup
   Name: AOE+
   Description: Increases the area of attack size by $%
-  EffectType: 5
-  Amount: 5
   Image: {fileID: 21300000, guid: 07825a3483e20634086f30bf9d9f82a9, type: 3}
+  EffectType: 5
+  CommonAmount: 5
+  UncommonAmount: 10
+  EpicAmount: 20
+  LegendaryAmount: 35

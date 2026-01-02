@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7615846664514443712}
   - component: {fileID: 1984655017362980623}
   m_Layer: 6
-  m_Name: Powerup minimap icon
+  m_Name: Item minimap icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,10 +100,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1135163022656360152}
   - component: {fileID: 4505381522998939945}
-  - component: {fileID: 8033203435041446223}
   - component: {fileID: 3385702623676277769}
+  - component: {fileID: 3035825226967716692}
   m_Layer: 0
-  m_Name: Powerup
+  m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,19 +183,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8033203435041446223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4753844287256152286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad619b9380bfe24781f02572d5ba4a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PowerupObject
-  SpawnLocationIndex: 0
 --- !u!61 &3385702623676277769
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -234,7 +221,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -242,3 +229,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &3035825226967716692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753844287256152286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5db2dbaee6b55d49b2e5e4bc5efce19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemObject
+  SpawnLocationIndex: 0

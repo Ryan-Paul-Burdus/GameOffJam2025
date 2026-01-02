@@ -9,10 +9,18 @@ public enum PickupType
     Powerup,
 }
 
-[System.Serializable]
-public class PowerupSpawnLocation
+public enum Rarity
 {
-    public PowerupSpawnLocation(Transform spawnLocation, bool occupied)
+    Common,
+    Uncommon,
+    Epic,
+    Legendary
+}
+
+[System.Serializable]
+public struct ItemSpawnLocation
+{
+    public ItemSpawnLocation(Transform spawnLocation, bool occupied)
     {
         Location = spawnLocation;
         Occupied = occupied;
@@ -30,18 +38,30 @@ public class PickupManager : MonoBehaviour
     [Header("Pickup UI")]
     public GameObject PickupUI;
 
+    public Color CommonRarityColor;
+    public Color UncommonRarityColor;
+    public Color EpicRarityColor;
+    public Color LegendaryRarityColor;
+
     [Header("Powerups")]
-    public GameObject PowerupPrefab;
     public PowerupDisplay[] PowerupPickupDisplays;
     public Powerup[] AllPowerups;
-    public Transform PowerupHolder;
-    public Transform PowerupSpawnHolder;
-    public int MaxPowerupsAllowedOnMap = 50;
-    public int CurrentPowerupsOnMap; 
-    public float PowerupSpawnCooldown = 3f;
 
-    private List<PowerupSpawnLocation> PowerupSpawnLocations = new();
-    private bool canSpawnPowerup = true;
+    private float commonPowerupPercentage = 50.0f;
+    private float uncommonPowerupPercentage = 35.0f;
+    private float epicPowerupPercentage = 10.0f;
+    private float legendaryPowerupPercentage = 5.0f;
+
+    [Header("Items")]
+    public ItemObject ItemPrefab;
+    public Transform ItemsHolder;
+    public Transform ItemSpawnPointHolder;
+    public int MaxItemsAllowedOnMap = 50;
+    public int CurrentItemsOnMap;
+    public float ItemSpawnCooldown = 3f;
+
+    private readonly List<ItemSpawnLocation> ItemSpawnLocations = new();
+    private bool canSpawnItem = true;
 
 
     private void Awake()
@@ -54,47 +74,57 @@ public class PickupManager : MonoBehaviour
         Instance = this;
 
         // Fill the powerup spawn locations
-        PowerupSpawnLocations.Clear();
-        foreach (Transform spawnLocation in PowerupSpawnHolder)
+        ItemSpawnLocations.Clear();
+        foreach (Transform spawnLocation in ItemSpawnPointHolder)
         {
-            PowerupSpawnLocations.Add(new PowerupSpawnLocation(spawnLocation, false));
+            ItemSpawnLocations.Add(new ItemSpawnLocation(spawnLocation, false));
         }
 
-        StartCoroutine(SpawnPowerupCoroutine(MaxPowerupsAllowedOnMap));
+        StartCoroutine(SpawnItemCoroutine(MaxItemsAllowedOnMap));
     }
 
     private void Update()
     {
-        if (canSpawnPowerup && CurrentPowerupsOnMap < MaxPowerupsAllowedOnMap)
+        if (canSpawnItem && CurrentItemsOnMap < MaxItemsAllowedOnMap)
         {
-            StartCoroutine(SpawnPowerupCoroutine(1));
+            StartCoroutine(SpawnItemCoroutine(1));
         }
     }
 
     #region Powerups
 
-    public IEnumerator SpawnPowerupCoroutine(int numberToSpawn)
+    private Rarity RollChanceOnRarityTypeForPowerup()
     {
-        canSpawnPowerup = false;
+        float randomPercentage = Random.Range(0.0f, 100.0f);
 
-        for (int i = 0; i < numberToSpawn; i++)
+        if (randomPercentage >= commonPowerupPercentage)
         {
-            // Gets an un-occupied spawn location and spawns it
-            PowerupSpawnLocation[] availablePowerupLocations = PowerupSpawnLocations.Where(x => !x.Occupied).ToArray();
-            int randomSpawnIndex = Random.Range(0, availablePowerupLocations.Count());
-            PowerupSpawnLocation randomSpawnLocation = availablePowerupLocations[randomSpawnIndex];
-
-            PowerupObject powerUpObjectScript = Instantiate(PowerupPrefab,
-                randomSpawnLocation.Location.position,
-                Quaternion.identity, PowerupHolder).GetComponent<PowerupObject>();
-
-            powerUpObjectScript.SpawnLocationIndex = randomSpawnIndex;
-            randomSpawnLocation.Occupied = true;
-            CurrentPowerupsOnMap++;
+            return Rarity.Common;
         }
+        else if (randomPercentage >= uncommonPowerupPercentage)
+        {
+            return Rarity.Uncommon;
+        }
+        else if (randomPercentage >= epicPowerupPercentage)
+        {
+            return Rarity.Epic;
+        }
+        else
+        {
+            return Rarity.Legendary;
+        }
+    }
 
-        yield return new WaitForSeconds(PowerupSpawnCooldown);
-        canSpawnPowerup = true;
+    /// <summary>
+    /// Spawning callback for testing
+    /// </summary>
+    /// <param name="context"></param>
+    public void Open3RandomPowerups(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Show3RandomPowerups();
+        }
     }
 
     public void Show3RandomPowerups()
@@ -103,13 +133,10 @@ public class PickupManager : MonoBehaviour
         PlayerManager.Instance.PlayerMovement.IsDashing = false;
 
         // Show 3 random powerups
-        List<Powerup> tempPowerupList = AllPowerups.ToList();
-        
         for (int i = 0; i < 3; i++)
         {
-            Powerup currentPowerup = tempPowerupList[Random.Range(0, tempPowerupList.Count)];
-            PowerupPickupDisplays[i].UpdatePowerupDisplay(currentPowerup);
-            tempPowerupList.Remove(currentPowerup);
+            Powerup currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
+            PowerupPickupDisplays[i].UpdatePowerupDisplay(currentPowerup, RollChanceOnRarityTypeForPowerup());
         }
         PickupUI.SetActive(true);
 
@@ -117,7 +144,7 @@ public class PickupManager : MonoBehaviour
         //PowerupSpawnLocations[spawnLocationIndex].Occupied = false;
     }
 
-    public void TakeCurrentPowerupEffect(Powerup currentPowerup)
+    public void TakeCurrentPowerupEffect(Powerup currentPowerup, float amount)
     {
         PlayerManager.Instance.Score += (10 * EnemyManager.Instance.WaveNumber);
 
@@ -125,43 +152,43 @@ public class PickupManager : MonoBehaviour
         switch (currentPowerup.EffectType)
         {
             case Powerup.PowerUpEffectType.IncreaseDamage:
-                PlayerManager.Instance.IncreaseDamage(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseDamage(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseHealth:
-                PlayerManager.Instance.IncreaseHealth(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseHealth(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseAttackSpeed:
-                PlayerManager.Instance.IncreaseAttackSpeed(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseAttackSpeed(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseProjectileSize:
-                PlayerManager.Instance.IncreaseProjectileSize(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseProjectileSize(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseProjectileCount:
-                PlayerManager.Instance.IncreaseProjectileCount((int)currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseProjectileCount((int)amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseAttackAreaSize:
-                PlayerManager.Instance.IncreaseAttackAreaOfSize(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseAttackAreaOfSize(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseMoveSpeed:
-                PlayerManager.Instance.IncreaseMoveSpeed(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseMoveSpeed(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseDashDistance:
-                PlayerManager.Instance.IncreaseDashDistance(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseDashDistance(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseDashSpeed:
-                PlayerManager.Instance.IncreaseDashSpeed(currentPowerup.Amount);
+                PlayerManager.Instance.IncreaseDashSpeed(amount);
                 break;
 
             case Powerup.PowerUpEffectType.ReduceDashCooldown:
-                PlayerManager.Instance.ReduceDashCooldown(currentPowerup.Amount);
+                PlayerManager.Instance.ReduceDashCooldown(amount);
                 break;
 
             case Powerup.PowerUpEffectType.IncreaseShockChance:
@@ -180,8 +207,36 @@ public class PickupManager : MonoBehaviour
                 break;
         }
 
-        CurrentPowerupsOnMap--;
+        CurrentItemsOnMap--;
     }
 
     #endregion Powerups
+
+    #region Items
+
+    public IEnumerator SpawnItemCoroutine(int numberToSpawn)
+    {
+        canSpawnItem = false;
+
+        for (int i = 0; i < numberToSpawn; i++)
+        {
+            // Gets an un-occupied spawn location and spawns it
+            ItemSpawnLocation[] availableItemLocations = ItemSpawnLocations.Where(x => !x.Occupied).ToArray();
+            int randomSpawnIndex = Random.Range(0, availableItemLocations.Count());
+            ItemSpawnLocation randomSpawnLocation = availableItemLocations[randomSpawnIndex];
+
+            ItemObject ItemScript = Instantiate(ItemPrefab,
+                randomSpawnLocation.Location.position,
+                Quaternion.identity, ItemsHolder);
+
+            ItemScript.SpawnLocationIndex = randomSpawnIndex;
+            randomSpawnLocation.Occupied = true;
+            CurrentItemsOnMap++;
+        }
+
+        yield return new WaitForSeconds(ItemSpawnCooldown);
+        canSpawnItem = true;
+    }
+
+    #endregion Items
 }

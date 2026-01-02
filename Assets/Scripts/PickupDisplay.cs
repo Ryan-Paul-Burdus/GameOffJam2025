@@ -11,15 +11,42 @@ public class PowerupDisplay : MonoBehaviour
     private PickupType CurrentPickupType;
 
     private Powerup powerup;
+    private float powerupAmount;
 
-    public void UpdatePowerupDisplay(Powerup newPowerup)
+    public Image PowerupPanelBackground;
+
+    public void UpdatePowerupDisplay(Powerup newPowerup, Rarity newRarity)
     {
         CurrentPickupType = PickupType.Powerup;
         powerup = newPowerup;
 
         PowerupName.text = newPowerup.Name;
         PowerupImage.sprite = newPowerup.Image;
-        PowerupDescription.text = newPowerup.Description.Replace("$", newPowerup.Amount.ToString());
+
+        switch (newRarity)
+        {
+            case Rarity.Common:
+                powerupAmount = newPowerup.CommonAmount;
+                PowerupPanelBackground.color = PickupManager.Instance.CommonRarityColor;
+                break;
+
+            case Rarity.Uncommon:
+                powerupAmount = newPowerup.UncommonAmount;
+                PowerupPanelBackground.color = PickupManager.Instance.UncommonRarityColor;
+                break;
+
+            case Rarity.Epic:
+                powerupAmount = newPowerup.EpicAmount;
+                PowerupPanelBackground.color = PickupManager.Instance.EpicRarityColor;
+                break;
+
+            case Rarity.Legendary:
+                powerupAmount = newPowerup.LegendaryAmount;
+                PowerupPanelBackground.color = PickupManager.Instance.LegendaryRarityColor;
+                break;
+        };
+
+        PowerupDescription.text = newPowerup.Description.Replace("$", powerupAmount.ToString());
     }
 
     #region Buttons
@@ -30,7 +57,7 @@ public class PowerupDisplay : MonoBehaviour
         switch (CurrentPickupType)
         {
             case PickupType.Powerup:
-                PickupManager.Instance.TakeCurrentPowerupEffect(powerup);
+                PickupManager.Instance.TakeCurrentPowerupEffect(powerup, powerupAmount);
                 break;
         }
 
