@@ -217,7 +217,9 @@ public class EnemyManager : MonoBehaviour
         EnemyPool.Release(enemy);
         EnemiesLeftInWave--;
         PlayerManager.Instance.Score += Mathf.FloorToInt(enemy.MaxHealth);
-        XPManager.Instance.AddXP(10);
+
+        // Spawn an xp object
+        XPManager.Instance.SpawnXP(enemy, 10);
     }
 
     #endregion Damage

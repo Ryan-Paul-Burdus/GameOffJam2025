@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     [Header("Enemy properties")]
     public float MaxHealth = 20f;
     public float Damage = 20f;
-    private float moveSpeed = 1.8f;
+    private float moveSpeed = 1.5f;
 
     public float Health;
 
