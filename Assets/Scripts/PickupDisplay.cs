@@ -58,11 +58,14 @@ public class PowerupDisplay : MonoBehaviour
         {
             case PickupType.Powerup:
                 PickupManager.Instance.TakeCurrentPowerupEffect(powerup, powerupAmount);
+
+                if (PickupManager.Instance.randomPowerupGUIsInQueue <= 0)
+                {
+                    PickupManager.Instance.PickupUI.SetActive(false);
+                    Time.timeScale = 1.0f;
+                }
                 break;
         }
-
-        PickupManager.Instance.PickupUI.SetActive(false);
-        Time.timeScale = 1.0f;
     }
 
     #endregion Buttons

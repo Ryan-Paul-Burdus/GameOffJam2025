@@ -4,8 +4,7 @@ using UnityEngine;
 public class XP : MonoBehaviour
 {
     public SpriteRenderer SpriteRenderer;
-
-    private float xpValue;
+    public float xpValue;
 
     public void UpdateXPDisplay(Sprite xpSprite, float newXpValue)
     {
@@ -20,7 +19,7 @@ public class XP : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Stop movement coroutine if its still spawning
+            // Stop spawning position coroutine if its still spawning
             StopAllCoroutines();
 
             // Collect the XP

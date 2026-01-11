@@ -37,6 +37,7 @@ public class PickupManager : MonoBehaviour
 
     [Header("Pickup UI")]
     public GameObject PickupUI;
+    public int randomPowerupGUIsInQueue = 0;
 
     public Color CommonRarityColor;
     public Color UncommonRarityColor;
@@ -123,25 +124,29 @@ public class PickupManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Show3RandomPowerups();
+            AddNewRandomPowerupGUIToQueue();
         }
     }
 
-    public void Show3RandomPowerups()
+    public void AddNewRandomPowerupGUIToQueue()
     {
         Time.timeScale = 0.0f;
         PlayerManager.Instance.PlayerMovement.IsDashing = false;
 
-        // Show 3 random powerups
+        if (randomPowerupGUIsInQueue++ <= 0)
+        {
+            ShowNewRandom3Powerups();
+            PickupUI.SetActive(true);
+        }
+    }
+
+    public void ShowNewRandom3Powerups()
+    {
         for (int i = 0; i < 3; i++)
         {
             Powerup currentPowerup = AllPowerups[Random.Range(0, AllPowerups.Length)];
             PowerupPickupDisplays[i].UpdatePowerupDisplay(currentPowerup, RollChanceOnRarityTypeForPowerup());
         }
-        PickupUI.SetActive(true);
-
-        //// Make the space unoccupied after pickup
-        //PowerupSpawnLocations[spawnLocationIndex].Occupied = false;
     }
 
     public void TakeCurrentPowerupEffect(Powerup currentPowerup, float amount)
@@ -207,7 +212,11 @@ public class PickupManager : MonoBehaviour
                 break;
         }
 
-        CurrentItemsOnMap--;
+        // Remove a powerup GUI from the queue and check if there is another to show after
+        if (--randomPowerupGUIsInQueue > 0)
+        {
+            ShowNewRandom3Powerups();
+        }
     }
 
     #endregion Powerups

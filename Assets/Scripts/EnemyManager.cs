@@ -41,9 +41,6 @@ public class EnemyManager : MonoBehaviour
 
     public int EnemiesLeftInWave;
 
-    [Header("Damage")]
-    public bool EnemyTakingDamage = false;
-
     #endregion Properties
 
     #region Unity methods
@@ -133,6 +130,8 @@ public class EnemyManager : MonoBehaviour
     /// <param name="enemy">The enemy to spawn</param>
     private void GetEnemyFromPool(Enemy enemy)
     {
+        enemy.IsDead = false;
+
         List<EnemySpawnLocation> possibleLocationsToSpawn = EnemySpawnLocations.Where(x => x.IsWithinPlayArea).ToList();
 
         if (possibleLocationsToSpawn.Count > 0)
@@ -194,17 +193,21 @@ public class EnemyManager : MonoBehaviour
     {
         // Do damage to the enemy
         Enemy enemyScript = enemyObject.GetComponent<Enemy>();
-        enemyScript.DoDamageFlash();
 
         float damage = PlayerManager.Instance.Damage;
         enemyScript.Health -= damage;
 
         DamageIndicatorManager.Instance.SpawnDamageIndicator(enemyObject, damage);
 
-        if (enemyScript.Health <= 0)
+        if (enemyScript.Health <= 0 && !enemyScript.IsDead)
         {
+            enemyScript.IsDead = true;
             enemyScript.ResetDamageFlash();
             KillEnemy(enemyScript);
+        }
+        else
+        {
+            enemyScript.DoDamageFlash();
         }
     }
 
@@ -218,8 +221,8 @@ public class EnemyManager : MonoBehaviour
         EnemiesLeftInWave--;
         PlayerManager.Instance.Score += Mathf.FloorToInt(enemy.MaxHealth);
 
-        // Spawn an xp object
-        XPManager.Instance.SpawnXP(enemy, 10);
+        // Spawn xp
+        XPManager.Instance.SpawnXP(enemy, 224);
     }
 
     #endregion Damage

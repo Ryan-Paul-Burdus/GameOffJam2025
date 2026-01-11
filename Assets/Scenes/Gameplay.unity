@@ -595,9 +595,12 @@ MonoBehaviour:
   XpScript: {fileID: 4795036524389862005, guid: be916a98f2381864a8a89e0d09c64044, type: 3}
   xpSlider: {fileID: 2124264986}
   MaxXPValue: 100
-  smallXP: {fileID: 172412662, guid: cac92cac024c8a241ac6d40af14aab65, type: 3}
-  mediumXP: {fileID: 52911021, guid: cac92cac024c8a241ac6d40af14aab65, type: 3}
-  largeXP: {fileID: 2086051448, guid: cac92cac024c8a241ac6d40af14aab65, type: 3}
+  SmallXPValue: 10
+  MediumXPValue: 100
+  LargeXPValue: 1000
+  SmallXPSprite: {fileID: 172412662, guid: cac92cac024c8a241ac6d40af14aab65, type: 3}
+  MediumXPSprite: {fileID: 52911021, guid: cac92cac024c8a241ac6d40af14aab65, type: 3}
+  LargeXPSprite: {fileID: 2086051448, guid: cac92cac024c8a241ac6d40af14aab65, type: 3}
 --- !u!1001 &56106879
 PrefabInstance:
   m_ObjectHideFlags: 0

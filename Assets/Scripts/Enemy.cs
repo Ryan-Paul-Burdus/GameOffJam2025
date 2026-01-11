@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
 
     public float Health;
 
+    public bool IsDead = false;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

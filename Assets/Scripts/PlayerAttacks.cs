@@ -79,6 +79,8 @@ public class PlayerAttacks : MonoBehaviour
 
     private void GetBulletFromPool(Bullet bullet)
     {
+        bullet.hitEnemy = false;
+
         float currentBulletAngle = angleStep * currentBulletIndex;
         Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, lookRotation + currentBulletAngle - centeringOffset));
 

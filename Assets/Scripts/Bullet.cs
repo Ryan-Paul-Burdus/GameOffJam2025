@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
 
     private PlayerAttacks playerAttacksScript;
 
+    public bool hitEnemy;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,12 +38,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && !EnemyManager.Instance.EnemyTakingDamage)
+        if (collision.CompareTag("Enemy") && !hitEnemy)
         {
-            EnemyManager.Instance.EnemyTakingDamage = true;
+            hitEnemy = true;
             EnemyManager.Instance.TakeDamage(collision.gameObject);
             playerAttacksScript.BulletPool.Release(this);
-            EnemyManager.Instance.EnemyTakingDamage = false;
         }
 
         else if (collision.CompareTag("Map Obstacle"))
