@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 using static UnityEditor.FilePathAttribute;
@@ -30,23 +32,7 @@ public class PlayerAttacks : MonoBehaviour
         // Attack an enemy if possible
         if (!WaveAttackAbility.IsCoolingDown && targets.Count > 0)
         {
-            FindNearestEnemy();
-
-            if (currentTarget != null)
-            {
-
-                angleStep = PlayerManager.Instance.SpreadAngle / PlayerManager.Instance.TotalProjectileCount;
-                centeringOffset = (PlayerManager.Instance.SpreadAngle / 2) - (angleStep / 2);
-                lookRotation = Quaternion.LookRotation(Vector3.forward, (currentTarget.transform.position - PlayerManager.Instance.Player.transform.position).normalized).eulerAngles.z;
-
-                for (int i = 0; i < PlayerManager.Instance.TotalProjectileCount; i++)
-                {
-                    currentBulletIndex = i;
-                    BulletPool.Get();
-                }
-
-                WaveAttackAbility.IsCoolingDown = true;
-            }
+            AttackNearestEnemy();
         }
     }
 
@@ -67,6 +53,76 @@ public class PlayerAttacks : MonoBehaviour
     }
 
     #region Methods
+
+    private void AttackNearestEnemy()
+    {
+        float spreadAngle = PlayerManager.Instance.SpreadAngle;
+        float attackareaSize = PlayerManager.Instance.AttackAreaOfSize;
+        float projectileCount = PlayerManager.Instance.TotalProjectileCount;
+        Vector3 playerPosition = PlayerManager.Instance.Player.transform.position;
+
+        if (targets.Count <= 0)
+        {
+            return;
+        }
+
+        GameObject closestEnemy = null;
+        float closestDistance = float.PositiveInfinity;
+        Vector2 playerPos2D = playerPosition;
+
+        foreach (GameObject target in targets)
+        {
+            Vector2 toTarget = (Vector2)target.transform.position - playerPos2D;
+            float targetDistance = toTarget.magnitude;
+            if (targetDistance <= 0f)
+            {
+                continue;
+            }
+
+            Vector2 direction = toTarget / targetDistance;
+
+            // RaycastAll along the exact distance to the target (+ small epsilon).
+            float rayLength = targetDistance + 0.05f;
+            RaycastHit2D[] hits = Physics2D.RaycastAll(playerPos2D, direction, rayLength);
+
+            // Draw debug ray scaled by length so it's visible and accurate.
+            Debug.DrawRay(playerPos2D, direction * rayLength, Color.red, 0.1f);
+
+            // Find the closest hit (RaycastAll is not guaranteed to be ordered in all cases).
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            RaycastHit2D firstHit = hits.First(x => !x.collider.CompareTag("Player") && !x.collider.CompareTag("PlayerAttachment"));
+
+            // If the hit isn't an enemy then move onto the next target
+            if (!firstHit.collider.CompareTag("Enemy"))
+            {
+                continue;
+            }
+
+            // Use the actual target distance to find the nearest enemy.
+            if (targetDistance < closestDistance)
+            {
+                closestEnemy = target;
+                closestDistance = targetDistance;
+            }
+        }
+
+        currentTarget = closestEnemy;
+
+        if (currentTarget != null)
+        {
+            angleStep = spreadAngle / projectileCount;
+            centeringOffset = (spreadAngle / 2) - (angleStep / 2);
+            lookRotation = Quaternion.LookRotation(Vector3.forward, (currentTarget.transform.position - playerPosition).normalized).eulerAngles.z;
+
+            for (int i = 0; i < projectileCount; i++)
+            {
+                currentBulletIndex = i;
+                BulletPool.Get();
+            }
+
+            WaveAttackAbility.IsCoolingDown = true;
+        }
+    }
 
     #region Bullet pooling
 
@@ -96,28 +152,6 @@ public class PlayerAttacks : MonoBehaviour
     }
 
     #endregion Bullet pooling
-
-    private void FindNearestEnemy()
-    {
-        if (targets.Count <= 0)
-        {
-            return;
-        }
-
-        GameObject closestEnemy = targets[0];
-        float closestDistance = 9999;
-        foreach (GameObject target in targets)
-        {
-            float currentTargetDistance = (target.transform.position - gameObject.transform.position).magnitude;
-            if (currentTargetDistance < closestDistance)
-            {
-                closestEnemy = target;
-                closestDistance = currentTargetDistance;
-            }
-        }
-
-        currentTarget = closestEnemy;
-    }
 
     #endregion Methods
 }

@@ -449,6 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupManager
   PickupUI: {fileID: 1800728628}
+  randomPowerupGUIsInQueue: 0
   CommonRarityColor: {r: 1, g: 1, b: 1, a: 1}
   UncommonRarityColor: {r: 0.3987629, g: 0.8207547, b: 0.45904744, a: 1}
   EpicRarityColor: {r: 0.7722392, g: 0.17528482, b: 0.9528302, a: 1}
@@ -579,7 +580,6 @@ MonoBehaviour:
   EnemyHolder: {fileID: 486176994}
   WaveNumber: 1
   EnemiesLeftInWave: 0
-  EnemyTakingDamage: 0
 --- !u!114 &47193712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5880,7 +5880,7 @@ GameObject:
   - component: {fileID: 645167815}
   m_Layer: 0
   m_Name: Atack AOE
-  m_TagString: Untagged
+  m_TagString: PlayerAttachment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

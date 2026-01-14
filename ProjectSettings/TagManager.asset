@@ -9,6 +9,7 @@ TagManager:
   - Map
   - EnemySpawnBorder
   - Map Obstacle
+  - PlayerAttachment
   layers:
   - Default
   - TransparentFX
