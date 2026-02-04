@@ -38,6 +38,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Blur_offset: 0
+    - _CRT_effect_enabled: 1
     - _Number_of_scan_lines: 64
     - _Scan_lines_speed: 0.01
     m_Colors:
