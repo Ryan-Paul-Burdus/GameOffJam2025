@@ -119,6 +119,7 @@ MonoBehaviour:
   MaxHealth: 20
   Damage: 20
   Health: 0
+  IsDead: 0
 --- !u!50 &6093589468862293477
 Rigidbody2D:
   serializedVersion: 5
@@ -217,7 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc8038b026933db438f2f43d3843f0eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlash
-  material: {fileID: -876546973899608171, guid: 4a7e5367bb8718b4d990f27d38bbff5a, type: 3}
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashDuration: 0.1
 --- !u!1 &3975197517476467700
@@ -337,7 +337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7250244899366840433
 Transform:
   m_ObjectHideFlags: 0

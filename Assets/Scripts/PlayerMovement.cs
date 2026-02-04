@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="context">The input manager action</param>
     public void MoveMouse(InputAction.CallbackContext context)
     {
-        if (MenuManager.Instance.IsPaused)
+        if (GameplayUIManager.Instance.IsPaused)
         {
             return;
         }

@@ -209,7 +209,7 @@ public class PlayerManager : MonoBehaviour
         // Do anything needed before killing the player
 
         //End the game
-        MenuManager.Instance.OpenGameOverMenu(ScoreText.text);
+        GameplayUIManager.Instance.OpenGameOverScreen(ScoreText.text);
     }
 
     #endregion Damage player

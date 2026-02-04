@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
+public class GameplayUIManager : MonoBehaviour
 {
-    public static MenuManager Instance { get; private set; }
+    public static GameplayUIManager Instance { get; private set; }
 
-    public GameObject GameplayMenuHolder;
+    public GameObject MenuObject;
     public GameObject PauseMenu;
     public GameObject OptionsMenu;
-    public GameObject GameOverMenu;
+    public GameObject GameOverScreen;
 
     public TextMeshProUGUI ScoreText;
 
@@ -26,50 +26,57 @@ public class MenuManager : MonoBehaviour
         Instance = this;
     }
 
+    #region Pause
+
     public void TogglePauseMenu(InputAction.CallbackContext context)
     {
-        if (IsPaused)
+        if (context.performed)
         {
-            ClosePauseMenu();
-        }
-        else
-        {
-            OpenPauseMenu();
+            if (IsPaused)
+            {
+                ClosePauseMenu();
+            }
+            else
+            {
+                OpenPauseMenu();
+            }
         }
     }
 
-    public void OpenPauseMenu()
+    private void OpenPauseMenu()
     {
         IsPaused = true;
         Time.timeScale = 0.0f;
 
         PauseMenu.SetActive(true);
         OptionsMenu.SetActive(false);
-        GameOverMenu.SetActive(false);
+        GameOverScreen.SetActive(false);
 
-        GameplayMenuHolder.SetActive(true);
+        MenuObject.SetActive(true);
     }
 
-    public void ClosePauseMenu()
+    private void ClosePauseMenu()
     {
-        GameplayMenuHolder.SetActive(false);
+        MenuObject.SetActive(false);
 
         PauseMenu.SetActive(false);
         OptionsMenu.SetActive(false);
-        GameOverMenu.SetActive(false);
+        GameOverScreen.SetActive(false);
 
         IsPaused = false;
         Time.timeScale = 1.0f;
     }
 
+    #endregion Pause
+
     public void OpenOptionsMenu()
     {
         PauseMenu.SetActive(false);
         OptionsMenu.SetActive(true);
-        GameOverMenu.SetActive(false);
+        GameOverScreen.SetActive(false);
     }
 
-    public void OpenGameOverMenu(string scoreText)
+    public void OpenGameOverScreen(string scoreText)
     {
         IsPaused = true;
         Time.timeScale = 0.0f;
@@ -78,19 +85,14 @@ public class MenuManager : MonoBehaviour
 
         PauseMenu.SetActive(false);
         OptionsMenu.SetActive(false);
-        GameOverMenu.SetActive(true);
+        GameOverScreen.SetActive(true);
 
-        GameplayMenuHolder.SetActive(true);
+        MenuObject.SetActive(true);
     }
 
-    public void OpenMainMenuButton()
+    public void LoadMainMenuButton()
     {
         SceneManager.LoadScene("Main Menu");
-    }
-
-    public void StartGameplayMenuButton()
-    {
-        SceneManager.LoadScene("Gameplay");
     }
 
     public void QuitGameButton()

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class PowerupDisplay : MonoBehaviour
 {
+    public GameplayPickupDisplay GameplayPickupDisplay;
+
     public TextMeshProUGUI PowerupName;
     public Image PowerupImage;
     public TextMeshProUGUI PowerupDescription;
@@ -57,11 +59,11 @@ public class PowerupDisplay : MonoBehaviour
         switch (CurrentPickupType)
         {
             case PickupType.Powerup:
-                PickupManager.Instance.TakeCurrentPowerupEffect(powerup, powerupAmount);
+                GameplayPickupDisplay.TakeCurrentPowerupEffect(powerup, powerupAmount);
 
-                if (PickupManager.Instance.randomPowerupGUIsInQueue <= 0)
+                if (GameplayPickupDisplay.randomPowerupGUIIsInQueue <= 0)
                 {
-                    PickupManager.Instance.PickupUI.SetActive(false);
+                    GameplayPickupDisplay.PickupUI.SetActive(false);
                     Time.timeScale = 1.0f;
                 }
                 break;

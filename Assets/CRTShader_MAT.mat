@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CRTShader_MAT
+  m_Shader: {fileID: -6465566751694194690, guid: a7564ad6b8517a14b974b0640302d003, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blur_offset: 0
+    - _Number_of_scan_lines: 64
+    - _Scan_lines_speed: 0.01
+    m_Colors:
+    - _Color: {r: 0.86039764, g: 0.86039764, b: 0.86039764, a: 0}
+    - _Scan_line_color_1: {r: 0.48362404, g: 0.5447414, b: 0.7169812, a: 0}
+    - _Scan_line_color_2: {r: 0, g: 0.24411604, b: 0.6509434, a: 0}
+    - _checkerboard_color_1: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.11372549}
+    - _checkerboard_color_2: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0.1568628}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -13,6 +13,8 @@ public class XPManager : MonoBehaviour
     public XP XpScript;
     public ObjectPool<XP> XpPool;
 
+    public GameplayPickupDisplay GameplayPickupDisplay;
+
     private float minTimeToXPLerpPosition = 0.2f;
     private float maxTimeToXPLerpPosition = 0.5f;
     private float minDistanceForXPLerpPosition = 0.5f;
@@ -60,8 +62,7 @@ public class XPManager : MonoBehaviour
             CurrentPlayerXP -= MaxXPValue;
 
             // Show the 3 random powerups
-            // TODO: Make this add a powerup to a queue for the gui to look through each time
-            PickupManager.Instance.AddNewRandomPowerupGUIToQueue();
+            GameplayPickupDisplay.AddNewRandomPowerupGUIToQueue();
 
             // Updates the max xp to the new max
             UpdateMaxXP(MaxXPValue *= 1.1f);
@@ -130,9 +131,10 @@ public class XPManager : MonoBehaviour
     {
         var xpList = new List<(Sprite xpSprite, float xpValue)>();
         if (totalXpForXpSpawn <= 0f)
+        {
             return xpList;
+        }
 
-        const int maxSpawn = 5;
         float xpLeftToAdd = totalXpForXpSpawn;
 
         while (xpLeftToAdd > 0f)
